@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		84919DAC239A8D2700877CEE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84919DAB239A8D2700877CEE /* main.swift */; };
+		84919DBF239A8D9000877CEE /* Day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84919DBE239A8D9000877CEE /* Day1.swift */; };
+		84919DC0239A8D9000877CEE /* Day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84919DBE239A8D9000877CEE /* Day1.swift */; };
+		84919DC2239A8DA200877CEE /* Day1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84919DC1239A8DA200877CEE /* Day1Tests.swift */; };
+		84919DC6239A93FA00877CEE /* Day1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84919DC5239A91A200877CEE /* Day1.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,10 +29,22 @@
 /* Begin PBXFileReference section */
 		84919DA8239A8D2700877CEE /* AdventOfCode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AdventOfCode; sourceTree = BUILT_PRODUCTS_DIR; };
 		84919DAB239A8D2700877CEE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		84919DB6239A8D6400877CEE /* AdventOfCodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdventOfCodeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		84919DBA239A8D6400877CEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84919DBE239A8D9000877CEE /* Day1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day1.swift; sourceTree = "<group>"; };
+		84919DC1239A8DA200877CEE /* Day1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day1Tests.swift; sourceTree = "<group>"; };
+		84919DC5239A91A200877CEE /* Day1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Day1.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		84919DA5239A8D2700877CEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84919DB3239A8D6400877CEE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				84919DAA239A8D2700877CEE /* AdventOfCode */,
+				84919DB7239A8D6400877CEE /* AdventOfCodeTests */,
 				84919DA9239A8D2700877CEE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				84919DA8239A8D2700877CEE /* AdventOfCode */,
+				84919DB6239A8D6400877CEE /* AdventOfCodeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -57,9 +75,36 @@
 		84919DAA239A8D2700877CEE /* AdventOfCode */ = {
 			isa = PBXGroup;
 			children = (
+				84919DC4239A917700877CEE /* Resources */,
 				84919DAB239A8D2700877CEE /* main.swift */,
+				84919DBE239A8D9000877CEE /* Day1.swift */,
 			);
 			path = AdventOfCode;
+			sourceTree = "<group>";
+		};
+		84919DB7239A8D6400877CEE /* AdventOfCodeTests */ = {
+			isa = PBXGroup;
+			children = (
+				84919DC1239A8DA200877CEE /* Day1Tests.swift */,
+				84919DC3239A8DAB00877CEE /* other */,
+			);
+			path = AdventOfCodeTests;
+			sourceTree = "<group>";
+		};
+		84919DC3239A8DAB00877CEE /* other */ = {
+			isa = PBXGroup;
+			children = (
+				84919DBA239A8D6400877CEE /* Info.plist */,
+			);
+			path = other;
+			sourceTree = "<group>";
+		};
+		84919DC4239A917700877CEE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				84919DC5239A91A200877CEE /* Day1.txt */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -82,6 +127,23 @@
 			productReference = 84919DA8239A8D2700877CEE /* AdventOfCode */;
 			productType = "com.apple.product-type.tool";
 		};
+		84919DB5239A8D6400877CEE /* AdventOfCodeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84919DBB239A8D6400877CEE /* Build configuration list for PBXNativeTarget "AdventOfCodeTests" */;
+			buildPhases = (
+				84919DB2239A8D6400877CEE /* Sources */,
+				84919DB3239A8D6400877CEE /* Frameworks */,
+				84919DB4239A8D6400877CEE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AdventOfCodeTests;
+			productName = AdventOfCodeTests;
+			productReference = 84919DB6239A8D6400877CEE /* AdventOfCodeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -93,6 +155,9 @@
 				ORGANIZATIONNAME = "Mikel Elorz";
 				TargetAttributes = {
 					84919DA7239A8D2700877CEE = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
+					84919DB5239A8D6400877CEE = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
 				};
@@ -111,16 +176,38 @@
 			projectRoot = "";
 			targets = (
 				84919DA7239A8D2700877CEE /* AdventOfCode */,
+				84919DB5239A8D6400877CEE /* AdventOfCodeTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		84919DB4239A8D6400877CEE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84919DC6239A93FA00877CEE /* Day1.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		84919DA4239A8D2700877CEE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84919DBF239A8D9000877CEE /* Day1.swift in Sources */,
 				84919DAC239A8D2700877CEE /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84919DB2239A8D6400877CEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84919DC0239A8D9000877CEE /* Day1.swift in Sources */,
+				84919DC2239A8DA200877CEE /* Day1Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +345,40 @@
 			};
 			name = Release;
 		};
+		84919DBC239A8D6400877CEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = AdventOfCodeTests/other/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sh.mikel.AdventOfCodeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		84919DBD239A8D6400877CEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = AdventOfCodeTests/other/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sh.mikel.AdventOfCodeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -275,6 +396,15 @@
 			buildConfigurations = (
 				84919DB0239A8D2700877CEE /* Debug */,
 				84919DB1239A8D2700877CEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84919DBB239A8D6400877CEE /* Build configuration list for PBXNativeTarget "AdventOfCodeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84919DBC239A8D6400877CEE /* Debug */,
+				84919DBD239A8D6400877CEE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
