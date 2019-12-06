@@ -11,18 +11,20 @@
 		84919DBF239A8D9000877CEE /* Day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84919DBE239A8D9000877CEE /* Day1.swift */; };
 		84919DC0239A8D9000877CEE /* Day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84919DBE239A8D9000877CEE /* Day1.swift */; };
 		84919DC2239A8DA200877CEE /* Day1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84919DC1239A8DA200877CEE /* Day1Tests.swift */; };
-		84919DC6239A93FA00877CEE /* Day1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84919DC5239A91A200877CEE /* Day1.txt */; };
+		84919DC8239A95B800877CEE /* Day1.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84919DC5239A91A200877CEE /* Day1.txt */; };
+		84AB8576239AACE40036871B /* Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB8575239AACE40036871B /* Day2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		84919DA6239A8D2700877CEE /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				84919DC8239A95B800877CEE /* Day1.txt in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -34,6 +36,7 @@
 		84919DBE239A8D9000877CEE /* Day1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day1.swift; sourceTree = "<group>"; };
 		84919DC1239A8DA200877CEE /* Day1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day1Tests.swift; sourceTree = "<group>"; };
 		84919DC5239A91A200877CEE /* Day1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Day1.txt; sourceTree = "<group>"; };
+		84AB8575239AACE40036871B /* Day2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +81,7 @@
 				84919DC4239A917700877CEE /* Resources */,
 				84919DAB239A8D2700877CEE /* main.swift */,
 				84919DBE239A8D9000877CEE /* Day1.swift */,
+				84AB8575239AACE40036871B /* Day2.swift */,
 			);
 			path = AdventOfCode;
 			sourceTree = "<group>";
@@ -186,7 +190,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84919DC6239A93FA00877CEE /* Day1.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84919DBF239A8D9000877CEE /* Day1.swift in Sources */,
+				84AB8576239AACE40036871B /* Day2.swift in Sources */,
 				84919DAC239A8D2700877CEE /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

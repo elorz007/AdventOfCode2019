@@ -8,5 +8,8 @@
 
 import Foundation
 
-print("Hello, World!")
+print("Advent Of Code starting!")
 
+let d1 = Day1()
+print("[Day1] Total fuel: " + String(d1.totalFuel()))
+print("[Day1] Total real fuel: " + String(d1.totalRealFuel()))
