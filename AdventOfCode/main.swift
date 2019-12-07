@@ -22,3 +22,5 @@ let d3 = Day3()
 print("[Day3] Manhattan distance of closest intersection: " + String(d3.mahattanDistanceOfClosestIntersection()))
 print("[Day3] Steps taken of fastest intersection: " + String(d3.stepsOfFastestIntersection()))
 
+let d4 = Day4()
+print("[Day4] Number of valid password: " + String(d4.numberOfDifferentPasswords()))
