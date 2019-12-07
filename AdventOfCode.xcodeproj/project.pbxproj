@@ -13,6 +13,8 @@
 		84919DC2239A8DA200877CEE /* Day1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84919DC1239A8DA200877CEE /* Day1Tests.swift */; };
 		84919DC8239A95B800877CEE /* Day1.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84919DC5239A91A200877CEE /* Day1.txt */; };
 		84AB8576239AACE40036871B /* Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB8575239AACE40036871B /* Day2.swift */; };
+		84AB8578239AB3730036871B /* Day2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB8577239AB3730036871B /* Day2Tests.swift */; };
+		84AB8579239B3EA70036871B /* Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB8575239AACE40036871B /* Day2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +39,7 @@
 		84919DC1239A8DA200877CEE /* Day1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day1Tests.swift; sourceTree = "<group>"; };
 		84919DC5239A91A200877CEE /* Day1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Day1.txt; sourceTree = "<group>"; };
 		84AB8575239AACE40036871B /* Day2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day2.swift; sourceTree = "<group>"; };
+		84AB8577239AB3730036871B /* Day2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day2Tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +92,9 @@
 		84919DB7239A8D6400877CEE /* AdventOfCodeTests */ = {
 			isa = PBXGroup;
 			children = (
-				84919DC1239A8DA200877CEE /* Day1Tests.swift */,
 				84919DC3239A8DAB00877CEE /* other */,
+				84919DC1239A8DA200877CEE /* Day1Tests.swift */,
+				84AB8577239AB3730036871B /* Day2Tests.swift */,
 			);
 			path = AdventOfCodeTests;
 			sourceTree = "<group>";
@@ -211,7 +215,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				84919DC0239A8D9000877CEE /* Day1.swift in Sources */,
+				84AB8579239B3EA70036871B /* Day2.swift in Sources */,
 				84919DC2239A8DA200877CEE /* Day1Tests.swift in Sources */,
+				84AB8578239AB3730036871B /* Day2Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
