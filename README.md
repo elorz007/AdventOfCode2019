@@ -1,5 +1,5 @@
 # AdventOfCode2019
-![](https://github.com/actions/AdventOfCode2019/workflows/Unit%20Tests/badge.svg)
+[![codecov](https://codecov.io/gh/elorz007/AdventOfCode2019/branch/master/graph/badge.svg)](https://codecov.io/gh/elorz007/AdventOfCode2019)
 
 # License: WTFPL
 
