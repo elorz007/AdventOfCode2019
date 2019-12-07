@@ -18,5 +18,7 @@ let d2 = Day2()
 print("[Day2] Restored state: " + String(d2.restoredState()))
 print("[Day2] Noun and Verb: " + String(d2.findNounAndVerb()))
 
-
+let d3 = Day3()
+print("[Day3] Manhattan distance of closest intersection: " + String(d3.mahattanDistanceOfClosestIntersection()))
+print("[Day3] Steps taken of fastest intersection: " + String(d3.stepsOfFastestIntersection()))
 
