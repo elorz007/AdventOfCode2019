@@ -8,9 +8,9 @@ jobs:
     runs-on: macOS-latest
 
     steps:
-    - Name: Checkout
-      uses: actions/checkout@master
-    - name: Run tests
-      run: |
-        xcodebuild clean test -project AdventOfCode.xcodeproj -scheme AdventOfCode  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-        bash <(curl -s https://codecov.io/bash)
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Run tests
+        run: |
+          xcodebuild clean test -project AdventOfCode.xcodeproj -scheme AdventOfCode  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+          bash <(curl -s https://codecov.io/bash)
