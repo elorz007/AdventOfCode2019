@@ -58,4 +58,15 @@ class Day2Tests: XCTestCase {
         XCTAssertNotEqual(program[0], restored)
     }
     
+    func testRunningInputProgramResultsIn4090701() {
+        let d = Day2()
+        let restored = d.restoredState()
+        XCTAssertEqual(4090701, restored)
+    }
+    
+    func testNounAndVerbCanBeSearched() {
+        let d = Day2()
+        let noundAndVerb = d.findNounAndVerb()
+        XCTAssertEqual(6421, noundAndVerb)
+    }
 }

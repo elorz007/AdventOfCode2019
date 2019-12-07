@@ -16,6 +16,7 @@ print("[Day1] Total real fuel: " + String(d1.totalRealFuel()))
 
 let d2 = Day2()
 print("[Day2] Restored state: " + String(d2.restoredState()))
+print("[Day2] Noun and Verb: " + String(d2.findNounAndVerb()))
 
 
 

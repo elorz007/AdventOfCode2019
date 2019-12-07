@@ -56,10 +56,30 @@ class Day2: NSObject {
         return computer.program![0]
     }
     
-    func inputProgram() -> [Int] {
+    func findNounAndVerb() -> Int {
+        let computer = IntcodeComputer()
+        let initial = 0
+        let limit = 99
+        var noun = initial
+        var verb = initial
+        computer.program = inputProgram(noun: noun, verb: verb)
+        computer.run()
+        while (computer.program![0] != 19690720) {
+            noun = noun + 1
+            if noun > limit {
+                noun = initial
+                verb = verb + 1
+            }
+            computer.program = inputProgram(noun: noun, verb: verb)
+            computer.run()
+        }
+        return 100 * noun + verb
+    }
+    
+    func inputProgram(noun : Int = 12, verb : Int = 2) -> [Int] {
         var program = input().split { $0.isPunctuation }.map { Int(String($0))! }
-        program[1] = 12
-        program[2] = 2
+        program[1] = noun
+        program[2] = verb
         return program
     }
 }
