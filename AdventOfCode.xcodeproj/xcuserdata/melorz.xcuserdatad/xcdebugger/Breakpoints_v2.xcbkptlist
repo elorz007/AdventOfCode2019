@@ -46,8 +46,8 @@
             filePath = "AdventOfCode/Day2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "findNounAndVerb()"
             landmarkType = "7">
          </BreakpointContent>
@@ -65,6 +65,38 @@
             startingLineNumber = "147"
             endingLineNumber = "147"
             landmarkName = "testFastestPointWithOneIntersection()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F1B16E6B-9C10-4A1D-888D-F24799AC5AB2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AdventOfCode/Day2.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "executeBinary(_:operation:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "190E89E4-97BE-42E2-BFA0-5984A32C72CC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AdventOfCode/Day2.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "executeBinary(_:operation:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

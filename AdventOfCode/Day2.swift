@@ -8,37 +8,131 @@
 
 import Cocoa
 
-class IntcodeComputer: NSObject {
-    var program: [Int]?
+typealias InputClosure = () -> Int
+typealias OutputClosure = (Int) -> Void
+typealias Program = [Int]
+
+enum ParameterMode {
+    case Position
+    case Inmediate
+}
+
+extension ParameterMode {
+    init(_ value: Int) {
+        switch value {
+        case 0: self = .Position
+        case 1: self = .Inmediate
+        default: self = .Position
+        }
+    }
+}
+
+struct Address {
+    let position: Int
+    let mode: ParameterMode
+}
+
+struct BinaryInstructionDescription {
+    let address1: Address
+    let address2: Address
+    let result: Address
+}
+
+struct Opcode {
+    let position: Int
+    let value: Int
+    let mode1: ParameterMode
+    let mode2: ParameterMode
+    let mode3: ParameterMode
     
-    func executeBinary(operation: (Int, Int) -> Int, at position: Int) {
+    init(position:Int, rawValue:Int) {
+        self.position = position
+        self.value = rawValue % 100
+        mode1 = ParameterMode((rawValue / 100) % 2)
+        mode2 = ParameterMode((rawValue / 1000) % 2)
+        mode3 = ParameterMode((rawValue / 10000) % 2)
+    }
+}
+
+extension Program {
+    subscript (address: Address) -> Element {
+        get {
+            switch address.mode {
+            case .Inmediate:
+                return self[address.position]
+            case .Position:
+                return self[self[address.position]]
+            }
+        }
+        set (value) {
+            self[self[address.position]] = value
+        }
+    }
+}
+
+class IntcodeComputer: NSObject {
+    var program: Program?
+    var input: InputClosure?
+    var output: OutputClosure?
+    
+    func executeBinary(_ opcode:Opcode, operation: (Int, Int) -> Int) {
+        let address1 = Address(position:opcode.position + 1, mode: opcode.mode1)
+        let address2 = Address(position:opcode.position + 2, mode: opcode.mode2)
+        let result = Address(position:opcode.position + 3, mode: opcode.mode3)
+        let description = BinaryInstructionDescription(address1: address1, address2: address2, result: result)
+        executeBinary(description, operation:operation)
+    }
+    
+    func executeBinary(_ description: BinaryInstructionDescription, operation: (Int, Int) -> Int) {
         if var program = self.program {
-            let firstOperandPosition = program[position + 1]
-            let secondOperandPosition = program[position + 2]
-            let resultPosition = program[position + 3]
-            let firstOperand = program[firstOperandPosition]
-            let secondOperand = program[secondOperandPosition]
+            let firstOperand = program[description.address1]
+            let secondOperand = program[description.address2]
             let result = operation(firstOperand, secondOperand)
-            program[resultPosition] = result
+            program[description.result] = result
             self.program = program
         }
     }
     
-    func executeInstruction(at position:(Int)) {
-        switch program![position] {
-        case 1:
-            executeBinary(operation: +, at:position)
-        case 2:
-            executeBinary(operation: *, at:position)
-        default: break
+    func executeInput(_ opcode: Opcode) {
+        if var program = self.program, let input = input {
+            let address = Address(position: opcode.position + 1, mode: opcode.mode1)
+            program[address] = input()
+            self.program = program
         }
     }
     
+    func executeOutput(_ opcode: Opcode) {
+        if let program = self.program, let output = output {
+            let address = Address(position: opcode.position + 1, mode: opcode.mode1)
+            output(program[address])
+        }
+    }
+    
+    func executeInstruction(at position:(Int)) -> Int {
+        var instructionLength = 0
+        let opcode = Opcode(position:position, rawValue:program![position])
+        switch opcode.value {
+        case 1:
+            executeBinary(opcode, operation:+)
+            instructionLength = 4
+        case 2:
+            executeBinary(opcode, operation:*)
+            instructionLength = 4
+        case 3:
+            executeInput(opcode)
+            instructionLength = 2
+        case 4:
+            executeOutput(opcode)
+            instructionLength = 2
+        default: break
+        }
+        return instructionLength
+    }
+    
     func run() {
-        let instructionLength = 4
         var instructionPointer = 0
-        while self.program![instructionPointer] != 99 {
-            executeInstruction(at: instructionPointer)
+        while program![instructionPointer] != 99 {
+            let instructionLength = executeInstruction(at: instructionPointer)
             instructionPointer = instructionPointer + instructionLength
         }
     }
