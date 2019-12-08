@@ -56,4 +56,9 @@ class Day5Tests: XCTestCase {
         computer.run()
         XCTAssertEqual(computer.program, [1101,100,-1,4,99])
     }
+    
+    func testStepsOfFastestIntersection() {
+        let d5 = Day5()
+        XCTAssertEqual(d5.finalOutput(), 16489636)
+    }
 }

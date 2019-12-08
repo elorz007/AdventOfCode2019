@@ -170,7 +170,7 @@ class Day2: NSObject {
         return 100 * noun + verb
     }
     
-    func inputProgram(noun : Int = 12, verb : Int = 2) -> [Int] {
+    func inputProgram(noun : Int = 12, verb : Int = 2) -> Program {
         var program = input().split { $0.isPunctuation }.map { Int(String($0))! }
         program[1] = noun
         program[2] = verb
