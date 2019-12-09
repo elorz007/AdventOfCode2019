@@ -26,10 +26,18 @@ class Day5: NSObject {
         computer.program = inputProgram()
         computer.input = { 1 }
         var finalOutput = 0
-        computer.output = { output in
-            finalOutput = output
-        }
+        computer.output = { finalOutput = $0 }
         computer.run()
         return finalOutput
+    }
+    
+    func diagnosticCodeThermalRadiator() -> Int {
+        let computer = IntcodeComputer()
+        computer.program = inputProgram()
+        computer.input = { 5 }
+        var output = 0
+        computer.output = { output = $0 }
+        computer.run()
+        return output
     }
 }

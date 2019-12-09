@@ -46,8 +46,8 @@
             filePath = "AdventOfCode/Day2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "findNounAndVerb()"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "AdventOfCode/Day2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "executeBinary(_:operation:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "AdventOfCode/Day2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "executeBinary(_:operation:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -179,17 +179,170 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "10AE09DE-4F1E-4F3D-8A4A-C105C09F4D3B"
+            uuid = "2F7D9333-F23F-433A-BC72-C5643E462D9C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
-            condition = "output != 0"
             continueAfterRunningActions = "No"
-            filePath = "AdventOfCode/Day5.swift"
+            filePath = "AdventOfCode/Day2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "finalOutput()"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "executeInstruction(at:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2F7D9333-F23F-433A-BC72-C5643E462D9C - e6933ae0ec9fcc70"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AdventOfCodeTests.IntcodeComputer.executeInstruction(at: Swift.Int) -&gt; Swift.Int"
+                  moduleName = "AdventOfCodeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/melorz/development/AdventOfCode/AdventOfCode/Day2.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
+                  offsetFromSymbolStart = "570">
+               </Location>
+               <Location
+                  uuid = "2F7D9333-F23F-433A-BC72-C5643E462D9C - e6933ae0ec9fcc70"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AdventOfCodeTests.IntcodeComputer.executeInstruction(at: Swift.Int) -&gt; Swift.Int"
+                  moduleName = "AdventOfCodeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/melorz/development/AdventOfCode/AdventOfCode/Day2.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
+                  offsetFromSymbolStart = "588">
+               </Location>
+               <Location
+                  uuid = "2F7D9333-F23F-433A-BC72-C5643E462D9C - e6933ae0ec9fcc70"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AdventOfCodeTests.IntcodeComputer.executeInstruction(at: Swift.Int) -&gt; Swift.Int"
+                  moduleName = "AdventOfCodeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/melorz/development/AdventOfCode/AdventOfCode/Day2.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
+                  offsetFromSymbolStart = "840">
+               </Location>
+               <Location
+                  uuid = "2F7D9333-F23F-433A-BC72-C5643E462D9C - e6933ae0ec9fcc70"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AdventOfCodeTests.IntcodeComputer.executeInstruction(at: Swift.Int) -&gt; Swift.Int"
+                  moduleName = "AdventOfCodeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/melorz/development/AdventOfCode/AdventOfCode/Day2.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
+                  offsetFromSymbolStart = "1099">
+               </Location>
+               <Location
+                  uuid = "2F7D9333-F23F-433A-BC72-C5643E462D9C - e6933ae0ec9fcc70"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AdventOfCodeTests.IntcodeComputer.executeInstruction(at: Swift.Int) -&gt; Swift.Int"
+                  moduleName = "AdventOfCodeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/melorz/development/AdventOfCode/AdventOfCode/Day2.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
+                  offsetFromSymbolStart = "1327">
+               </Location>
+               <Location
+                  uuid = "2F7D9333-F23F-433A-BC72-C5643E462D9C - e6933ae0ec9fcc70"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AdventOfCodeTests.IntcodeComputer.executeInstruction(at: Swift.Int) -&gt; Swift.Int"
+                  moduleName = "AdventOfCodeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/melorz/development/AdventOfCode/AdventOfCode/Day2.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
+                  offsetFromSymbolStart = "1555">
+               </Location>
+               <Location
+                  uuid = "2F7D9333-F23F-433A-BC72-C5643E462D9C - e6933ae0ec9fcc70"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AdventOfCodeTests.IntcodeComputer.executeInstruction(at: Swift.Int) -&gt; Swift.Int"
+                  moduleName = "AdventOfCodeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/melorz/development/AdventOfCode/AdventOfCode/Day2.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
+                  offsetFromSymbolStart = "1772">
+               </Location>
+               <Location
+                  uuid = "2F7D9333-F23F-433A-BC72-C5643E462D9C - e6933ae0ec9fcc70"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AdventOfCodeTests.IntcodeComputer.executeInstruction(at: Swift.Int) -&gt; Swift.Int"
+                  moduleName = "AdventOfCodeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/melorz/development/AdventOfCode/AdventOfCode/Day2.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
+                  offsetFromSymbolStart = "1989">
+               </Location>
+               <Location
+                  uuid = "2F7D9333-F23F-433A-BC72-C5643E462D9C - e6933ae0ec9fcc70"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AdventOfCodeTests.IntcodeComputer.executeInstruction(at: Swift.Int) -&gt; Swift.Int"
+                  moduleName = "AdventOfCodeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/melorz/development/AdventOfCode/AdventOfCode/Day2.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
+                  offsetFromSymbolStart = "2230">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A1DAADA2-A285-45BC-ACAB-FA8B5320A9BA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            condition = "program[newPointerAddress] == 104"
+            continueAfterRunningActions = "No"
+            filePath = "AdventOfCode/Day2.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "executeJump(_:condition:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

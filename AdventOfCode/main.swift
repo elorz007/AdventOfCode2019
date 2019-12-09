@@ -27,3 +27,5 @@ print("Advent Of Code starting!")
 
 let d5 = Day5()
 print("[Day5] Final output: " + String(d5.finalOutput()))
+print("[Day5] Thermal radiator diagnostic code: " + String(d5.diagnosticCodeThermalRadiator()))
+

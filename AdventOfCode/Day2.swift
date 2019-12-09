@@ -11,6 +11,7 @@ import Cocoa
 typealias InputClosure = () -> Int
 typealias OutputClosure = (Int) -> Void
 typealias Program = [Int]
+typealias ExecutionPointer = Int
 
 enum ParameterMode {
     case Position
@@ -108,32 +109,56 @@ class IntcodeComputer: NSObject {
         }
     }
     
-    func executeInstruction(at position:(Int)) -> Int {
-        var instructionLength = 0
-        let opcode = Opcode(position:position, rawValue:program![position])
+    func executeJump(_ opcode: Opcode, condition: (Int) -> Bool) -> ExecutionPointer {
+        var newExecutionPointer = opcode.position
+        if let program = self.program {
+            let valueAddress = Address(position: opcode.position + 1, mode: opcode.mode1)
+            let value = program[valueAddress]
+            if (condition(value)) {
+                let newPointerAddress = Address(position: opcode.position + 2, mode: opcode.mode2)
+                newExecutionPointer = program[newPointerAddress]
+            } else {
+                newExecutionPointer += 3
+            }
+        }
+        return newExecutionPointer
+    }
+    
+    func executeInstruction(at executionPointer:(ExecutionPointer)) -> ExecutionPointer {
+        var newExecutionPointer = executionPointer
+        let opcode = Opcode(position:executionPointer, rawValue:program![executionPointer])
         switch opcode.value {
         case 1:
             executeBinary(opcode, operation:+)
-            instructionLength = 4
+            newExecutionPointer += 4
         case 2:
             executeBinary(opcode, operation:*)
-            instructionLength = 4
+            newExecutionPointer += 4
         case 3:
             executeInput(opcode)
-            instructionLength = 2
+            newExecutionPointer += 2
         case 4:
             executeOutput(opcode)
-            instructionLength = 2
+            newExecutionPointer += 2
+        case 5:
+            newExecutionPointer = executeJump(opcode) { $0 != 0 }
+        case 6:
+            newExecutionPointer = executeJump(opcode) { $0 == 0 }
+        case 7:
+            executeBinary(opcode) { $0 < $1 ? 1 : 0 }
+            newExecutionPointer += 4
+        case 8:
+            executeBinary(opcode) { $0 == $1 ? 1 : 0 }
+            newExecutionPointer += 4
         default: break
         }
-        return instructionLength
+        return newExecutionPointer
     }
     
     func run() {
-        var instructionPointer = 0
-        while program![instructionPointer] != 99 {
-            let instructionLength = executeInstruction(at: instructionPointer)
-            instructionPointer = instructionPointer + instructionLength
+        var executrionPointer: ExecutionPointer = 0
+        while program![executrionPointer] != 99 {
+            executrionPointer = executeInstruction(at: executrionPointer)
         }
     }
 }
