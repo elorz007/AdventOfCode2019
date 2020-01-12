@@ -25,7 +25,11 @@ print("Advent Of Code starting!")
 //let d4 = Day4()
 //print("[Day4] Number of valid password: " + String(d4.numberOfDifferentPasswords()))
 
-let d5 = Day5()
-print("[Day5] Final output: " + String(d5.finalOutput()))
-print("[Day5] Thermal radiator diagnostic code: " + String(d5.diagnosticCodeThermalRadiator()))
+//let d5 = Day5()
+//print("[Day5] Final output: " + String(d5.finalOutput()))
+//print("[Day5] Thermal radiator diagnostic code: " + String(d5.diagnosticCodeThermalRadiator()))
+//
+//let d6 = Day6()
+//print("[Day6] Total orbits: " + String(d6.totalOrbits()))
+//print("[Day6] Minimum orbital transfers: " + String(d6.minimumOrbitalTransfers()))
 
