@@ -47,7 +47,7 @@ class Day7Tests: XCTestCase {
         XCTAssertEqual(expected, all.count)
     }
     
-    func testFindHighestSignal() {
+    func test_SLOW_FindHighestSignal() {
         let d7 = Day7()
         XCTAssertEqual(d7.findHighestSignal(), 67023)
     }
@@ -82,7 +82,7 @@ class Day7Tests: XCTestCase {
         }
     }
     
-    func testFindHighestSignalInFeedbackMode() {
+    func test_SLOW_FindHighestSignalInFeedbackMode() {
         let d7 = Day7()
         XCTAssertEqual(d7.findHighestSignalInFeedbackMode(), 7818398)
     }

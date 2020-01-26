@@ -68,7 +68,7 @@ class Day6Tests: XCTestCase {
         XCTAssertEqual(tree.children.first?.children.first?.children.first?.children.first?.value, "E")
     }
     
-    func DISABLED_testTotalOrbits() {
+    func test_SLOW_TotalOrbits() {
         let d6 = Day6()
         XCTAssertEqual(d6.totalOrbits(), 106065)
     }
@@ -107,7 +107,7 @@ class Day6Tests: XCTestCase {
         XCTAssertEqual(shortestPath, 4)
     }
     
-    func DISABLED_testMinimumOrbitalTransfers() {
+    func test_SLOW_MinimumOrbitalTransfers() {
         let d6 = Day6()
         XCTAssertEqual(d6.minimumOrbitalTransfers(), 253)
     }

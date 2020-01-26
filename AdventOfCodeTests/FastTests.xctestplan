@@ -1,0 +1,36 @@
+{
+  "configurations" : [
+    {
+      "id" : "27B1AE8D-7C21-4CA8-B716-E74BDC659A16",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "skippedTests" : [
+        "Day2Tests\/testNounAndVerbCanBeSearched()",
+        "Day2Tests\/test_SLOW_NounAndVerbCanBeSearched()",
+        "Day3Tests\/test_SLOW_StepsOfFastestIntersection()",
+        "Day4Tests\/test_SLOW_StepsOfFastestIntersection()",
+        "Day5Tests\/test_SLOW_JumpsNonZeroPositionMode()",
+        "Day6Tests\/test_SLOW_MinimumOrbitalTransfers()",
+        "Day6Tests\/test_SLOW_TotalOrbits()",
+        "Day7Tests\/test_SLOW_FindHighestSignal()",
+        "Day7Tests\/test_SLOW_FindHighestSignalInFeedbackMode()"
+      ],
+      "target" : {
+        "containerPath" : "container:AdventOfCode.xcodeproj",
+        "identifier" : "84919DB5239A8D6400877CEE",
+        "name" : "AdventOfCodeTests"
+      }
+    }
+  ],
+  "version" : 1
+}

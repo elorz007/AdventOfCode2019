@@ -11,6 +11,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: Run tests
-        run: xcodebuild clean test -project AdventOfCode.xcodeproj -scheme AdventOfCode  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+        run: xcodebuild clean test -project AdventOfCode.xcodeproj -scheme AdventOfCode -testPlan AllTests  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -parallel-testing-worker-count 8
       - name: Upload codecov
         run: bash <(curl -s https://codecov.io/bash) -t "6224361b-2333-4c99-8676-1e22970edb04"

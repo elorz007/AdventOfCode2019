@@ -64,7 +64,7 @@ class Day2Tests: XCTestCase {
         XCTAssertEqual(4090701, restored)
     }
     
-    func testNounAndVerbCanBeSearched() {
+    func test_SLOW_NounAndVerbCanBeSearched() {
         let d = Day2()
         let noundAndVerb = d.findNounAndVerb()
         XCTAssertEqual(6421, noundAndVerb)

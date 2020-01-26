@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "7D7FB5FD-C432-494A-9CC7-AD62C8908723",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:AdventOfCode.xcodeproj",
+        "identifier" : "84919DB5239A8D6400877CEE",
+        "name" : "AdventOfCodeTests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -174,7 +174,7 @@ class Day3Tests: XCTestCase {
         XCTAssertEqual(fastestIntersection!.stepsTaken, 410)
     }
     
-    func testStepsOfFastestIntersection() {
+    func test_SLOW_StepsOfFastestIntersection() {
         let d3 = Day3()
         XCTAssertEqual(d3.stepsOfFastestIntersection(), 16368)
     }

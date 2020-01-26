@@ -40,7 +40,7 @@ class Day4Tests: XCTestCase {
         XCTAssertFalse(checker.isValid(password))
     }
     
-    func DISABLED_testStepsOfFastestIntersection() {
+    func test_SLOW_StepsOfFastestIntersection() {
         let d4 = Day4()
         XCTAssertEqual(d4.numberOfDifferentPasswords(), 591)
     }

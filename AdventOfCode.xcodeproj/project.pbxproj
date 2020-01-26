@@ -79,6 +79,8 @@
 		84C61E6E23CFBB7E008966A1 /* Day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day7.swift; sourceTree = "<group>"; };
 		84C61E7023CFC29E008966A1 /* Day7Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day7Tests.swift; sourceTree = "<group>"; };
 		84C61E7323D10AB4008966A1 /* Day7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Day7.txt; sourceTree = "<group>"; };
+		84E1A5B723DE42EE00116947 /* AllTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AllTests.xctestplan; sourceTree = "<group>"; };
+		84E1A5B823DE433F00116947 /* FastTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = FastTests.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,8 @@
 				84AB858B239D652F0036871B /* Day5Tests.swift */,
 				84AB8593239EEEA60036871B /* Day6Tests.swift */,
 				84C61E7023CFC29E008966A1 /* Day7Tests.swift */,
+				84E1A5B723DE42EE00116947 /* AllTests.xctestplan */,
+				84E1A5B823DE433F00116947 /* FastTests.xctestplan */,
 			);
 			path = AdventOfCodeTests;
 			sourceTree = "<group>";

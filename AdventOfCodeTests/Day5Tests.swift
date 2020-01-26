@@ -103,7 +103,7 @@ class Day5Tests: XCTestCase {
         assert(program: program, witInput: 9, outputs: 0)
     }
     // MARK
-    func testJumpsNonZeroPositionMode() {
+    func test_SLOW_JumpsNonZeroPositionMode() {
         let program = [3,12,6,12,15,1,13,14,13,4,13,99,-1,0,1,9]
         assert(program: program, witInput: 89, outputs: 1)
     }
