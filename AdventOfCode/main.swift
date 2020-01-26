@@ -35,4 +35,4 @@ print("Advent Of Code starting!")
 
 let d7 = Day7()
 print("[Day7] Highest signal: " + String(d7.findHighestSignal()))
-
+print("[Day7] Highest signal in feedback mode: " + String(d7.findHighestSignalInFeedbackMode()))
