@@ -33,6 +33,10 @@ print("Advent Of Code starting!")
 //print("[Day6] Total orbits: " + String(d6.totalOrbits()))
 //print("[Day6] Minimum orbital transfers: " + String(d6.minimumOrbitalTransfers()))
 
-let d7 = Day7()
-print("[Day7] Highest signal: " + String(d7.findHighestSignal()))
-print("[Day7] Highest signal in feedback mode: " + String(d7.findHighestSignalInFeedbackMode()))
+//let d7 = Day7()
+//print("[Day7] Highest signal: " + String(d7.findHighestSignal()))
+//print("[Day7] Highest signal in feedback mode: " + String(d7.findHighestSignalInFeedbackMode()))
+
+let d8 = Day8()
+print("[Day8] Checksum: " + String(d8.checksumOfPasswordImage()))
+//print("[Day7] Highest signal in feedback mode: " + String(d7.findHighestSignalInFeedbackMode()))

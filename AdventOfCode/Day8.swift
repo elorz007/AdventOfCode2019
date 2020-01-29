@@ -87,15 +87,15 @@ extension Layer where Element : Numeric {
 }
 
 extension Image where T : Numeric {
-    func layerWithMostZeroes() -> Layer<T>? {
-        self.layers.max { a, b in a.numberOfZeroes() < b.numberOfZeroes() }
+    func layerWithFewestZeroes() -> Layer<T>? {
+        self.layers.min { a, b in a.numberOfZeroes() < b.numberOfZeroes() }
     }
 }
 
 extension Image where T: Numeric {
     func checksum() -> Int {
         var checksum = 0
-        if let layer = self.layerWithMostZeroes() {
+        if let layer = self.layerWithFewestZeroes() {
             checksum = layer.numberOfOnes() * layer.numberOfTwos()
         }
         return checksum
@@ -103,9 +103,12 @@ extension Image where T: Numeric {
 }
 
 class Day8: NSObject {
-//    func checksumOfPasswordImage() -> Int {
-//        
-//    }
+    
+    func checksumOfPasswordImage() -> Int {
+        let image = DefaultImageReader().read(input())
+        return image.checksum()
+    }
+    
     func input() -> String {
         try! String(contentsOfFile: "./Day8.txt").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }

@@ -80,37 +80,43 @@ class Day8Tests: XCTestCase {
     // MARK: -
     func testWhenImageHasLayersThenOneWithMostZeroesCanBeFound() {
         let image = Image(layers: [
-            [1,2,3,4],
+            [1,2,0,4],
             [1,0,0,4],
-            [1,2,3,4],
+            [1,2,3,5],
             [1,2,0,4],
         ])
-        XCTAssertEqual(image.layerWithMostZeroes(), [1,0,0,4])
+        XCTAssertEqual(image.layerWithFewestZeroes(), [1,2,3,5])
     }
     
     func testWhenTwoLayersHaveTheSameNumberThenFirstOneIsReturned() {
         let image = Image(layers: [
             [1,2,3,4],
             [1,0,0,4],
-            [1,2,3,4],
+            [1,2,3,5],
             [5,0,0,6],
         ])
-        XCTAssertEqual(image.layerWithMostZeroes(), [1,0,0,4])
+        XCTAssertEqual(image.layerWithFewestZeroes(), [1,2,3,4])
     }
     
     func testWhenImageHasNoLayersThenNilIsReturned() {
         let image:Image<Int> = Image(layers: [])
-        XCTAssertNil(image.layerWithMostZeroes())
+        XCTAssertNil(image.layerWithFewestZeroes())
     }
     
     // MARK: -
     func testCheckSumIsCalculated() {
         let image = Image(layers: [
-            [1,3,3,4,6],
-            [1,0,2,2,1],
-            [3,3,3,4,6],
-            [2,1,2,2,1],
+            [1,3,3,4,0],
+            [1,2,3,2,1],
+            [3,3,3,4,0],
+            [2,1,2,0,0],
         ])
         XCTAssertEqual(image.checksum(), 4)
+    }
+    
+    // MARK: -
+    func testChecksumOfPasswordImage() {
+        let d8 = Day8()
+        XCTAssertEqual(d8.checksumOfPasswordImage(), 1452)
     }
 }
