@@ -119,4 +119,12 @@ class Day8Tests: XCTestCase {
         let d8 = Day8()
         XCTAssertEqual(d8.checksumOfPasswordImage(), 1452)
     }
+    // MARK: -
+    
+    func testSampleImageIsRenderedCorrectly() {
+        let image = ColorImageReader(target: Dimension(width: 2, height: 2)).read("0222112222120000")
+        let expected:Layer<Color> = [.black,.white,.white,.black]
+        let rendered = image.render().layers.first!
+        XCTAssertEqual(rendered, expected)
+    }
 }

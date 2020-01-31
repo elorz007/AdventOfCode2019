@@ -39,4 +39,7 @@ print("Advent Of Code starting!")
 
 let d8 = Day8()
 print("[Day8] Checksum: " + String(d8.checksumOfPasswordImage()))
-//print("[Day7] Highest signal in feedback mode: " + String(d7.findHighestSignalInFeedbackMode()))
+print("[Day8] Password: ")
+d8.printPasswordImage()
+
+
