@@ -37,4 +37,9 @@ class Day9Tests: XCTestCase {
         computer.run()
         XCTAssertEqual(result, 1125899906842624)
     }
+    
+    func testBoostKeyCode() {
+        let d9 = Day9()
+        XCTAssertEqual(d9.boostKeyCode(), 2351176124)
+    }
 }

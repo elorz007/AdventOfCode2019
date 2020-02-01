@@ -19,10 +19,7 @@ class Day9: NSObject {
             return 1
         }
         var result = 0
-        computer.output = {
-            print($0)
-            result = $0
-        }
+        computer.output = { result = $0 }
         computer.run()
         return result
     }
