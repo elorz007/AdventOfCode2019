@@ -13,8 +13,10 @@ class Day9Tests: XCTestCase {
     func testQuine() {
         let computer = IntcodeComputer()
         computer.program = [109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99]
+        var output = [Int]()
+        computer.output = { output.append($0) }
         computer.run()
-        XCTAssertEqual(computer.program, [109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99])
+        XCTAssertEqual(computer.program, output)
     }
     
     func testExampleProgramShouldOutput16DigitNumber() {

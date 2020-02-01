@@ -12,13 +12,13 @@ typealias InputClosure = () -> Int
 typealias OutputClosure = (Int) -> Void
 typealias Program = [Int]
 typealias ExecutionPointer = Int
-typealias Memory = [Int]
+typealias DynamicMemory = [Int: Int]
 
 class IntcodeComputer: NSObject {
     var program: Program?
     var input: InputClosure?
     var output: OutputClosure?
-    var memory = Memory(repeating: 0, count: 10000)
+    var dynamicMemory = DynamicMemory()
     var relativeBase: Int = 0
     var executionPointer: ExecutionPointer = 0
     
@@ -81,7 +81,7 @@ class IntcodeComputer: NSObject {
         if position < program!.count {
             return program![position]
         } else {
-            return memory[position + program!.count]
+            return dynamicMemory[position] ?? 0
         }
     }
     
@@ -89,7 +89,7 @@ class IntcodeComputer: NSObject {
         if position < program!.count {
             program![position] = value
         } else {
-            memory[position + program!.count] = value
+            dynamicMemory[position] = value
         }
     }
     
@@ -100,16 +100,23 @@ class IntcodeComputer: NSObject {
             case .Position:
                 return self.value(at: self.value(at: address.position))
             case .Relative:
-                return self.value(at: self.value(at: address.relativePosition))
+                return self.value(at: self.value(at: address.position) + address.relativeBase)
         }
     }
     
     fileprivate func set(_ value: Int, at address: Address) {
-        self.set(value, at: self.value(at: address.position))
+        switch address.mode {
+            case .Inmediate:
+                assertionFailure("Address in immediate mode cannot be used to set")
+            case .Position:
+                self.set(value, at: self.value(at: address.position))
+            case .Relative:
+                self.set(value, at: self.value(at: address.position) + address.relativeBase)
+        }
     }
     
     fileprivate func executeInstruction() {
-        let opcode = Opcode(position:executionPointer, rawValue:program![executionPointer])
+        let opcode = Opcode(position:executionPointer, rawValue:value(at: executionPointer))
         switch opcode.value {
         case 1:
             executeBinary(opcode, operation:+)
@@ -129,13 +136,14 @@ class IntcodeComputer: NSObject {
             executeBinary(opcode) { $0 == $1 ? 1 : 0 }
         case 9:
             executeRelativeBaseAdjust(opcode)
-        default: break
+        default:
+            assertionFailure("Unknown opcode value")
         }
     }
     
     func run() {
         executionPointer = 0
-        while program![executionPointer] != 99 {
+        while value(at: executionPointer) != 99 {
             executeInstruction()
         }
     }
@@ -145,16 +153,9 @@ fileprivate struct Address {
     let position: Int
     let relativeBase: Int
     let mode: ParameterMode
-    var relativePosition: Int { relativeBase + position }
 }
 
-fileprivate extension Address {
-    func translate(to memory: Memory) -> Address {
-        return Address(position: position + memory.count, relativeBase: relativeBase, mode: mode)
-    }
-}
-
-fileprivate enum ParameterMode {
+fileprivate enum ParameterMode : CaseIterable {
     case Position
     case Inmediate
     case Relative
@@ -187,8 +188,9 @@ fileprivate struct Opcode {
     init(position:Int, rawValue:Int) {
         self.position = position
         self.value = rawValue % 100
-        mode1 = ParameterMode((rawValue / 100) % 2)
-        mode2 = ParameterMode((rawValue / 1000) % 2)
-        mode3 = ParameterMode((rawValue / 10000) % 2)
+        let parameterCount = ParameterMode.allCases.count
+        mode1 = ParameterMode(((rawValue / 100) % 10) % parameterCount)
+        mode2 = ParameterMode(((rawValue / 1000) % 100) % parameterCount)
+        mode3 = ParameterMode(((rawValue / 10000) % 1000) % parameterCount)
     }
 }
