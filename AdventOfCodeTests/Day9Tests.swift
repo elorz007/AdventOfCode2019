@@ -10,24 +10,13 @@ import XCTest
 
 class Day9Tests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testQuine() {
+        let computer = IntcodeComputer()
+        computer.program = [109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99]
+        computer.run()
+        XCTAssertEqual(computer.program, [109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99])
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+    
+    
 
 }
