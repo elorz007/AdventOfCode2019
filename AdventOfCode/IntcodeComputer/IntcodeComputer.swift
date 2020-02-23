@@ -21,15 +21,15 @@ class IntcodeComputer: NSObject {
     var dynamicMemory = DynamicMemory()
     var relativeBase: Int = 0
     var executionPointer: ExecutionPointer = 0
-    
-    fileprivate func executeBinary(_ opcode:Opcode, operation: (Int, Int) -> Int) {
-        let address1 = Address(position:opcode.position + 1, relativeBase: relativeBase, mode: opcode.mode1)
-        let address2 = Address(position:opcode.position + 2, relativeBase: relativeBase, mode: opcode.mode2)
-        let result = Address(position:opcode.position + 3, relativeBase: relativeBase, mode: opcode.mode3)
+
+    fileprivate func executeBinary(_ opcode: Opcode, operation: (Int, Int) -> Int) {
+        let address1 = Address(position: opcode.position + 1, relativeBase: relativeBase, mode: opcode.mode1)
+        let address2 = Address(position: opcode.position + 2, relativeBase: relativeBase, mode: opcode.mode2)
+        let result = Address(position: opcode.position + 3, relativeBase: relativeBase, mode: opcode.mode3)
         let description = BinaryInstructionDescription(address1: address1, address2: address2, result: result)
-        executeBinary(description, operation:operation)
+        executeBinary(description, operation: operation)
     }
-    
+
     fileprivate func executeBinary(_ description: BinaryInstructionDescription, operation: (Int, Int) -> Int) {
         let firstOperand = self.value(at: description.address1)
         let secondOperand = self.value(at: description.address2)
@@ -37,7 +37,7 @@ class IntcodeComputer: NSObject {
         self.set(result, at: description.result)
         executionPointer += 4
     }
-    
+
     fileprivate func executeInput(_ opcode: Opcode) {
         if let input = input {
             let address = Address(position: opcode.position + 1, relativeBase: relativeBase, mode: opcode.mode1)
@@ -46,7 +46,7 @@ class IntcodeComputer: NSObject {
         }
         executionPointer += 2
     }
-    
+
     fileprivate func executeOutput(_ opcode: Opcode) {
         if let output = output {
             let address = Address(position: opcode.position + 1, relativeBase: relativeBase, mode: opcode.mode1)
@@ -55,12 +55,12 @@ class IntcodeComputer: NSObject {
         }
         executionPointer += 2
     }
-    
+
     fileprivate func executeJump(_ opcode: Opcode, condition: (Int) -> Bool) {
         var newExecutionPointer = opcode.position
         let valueAddress = Address(position: opcode.position + 1, relativeBase: relativeBase, mode: opcode.mode1)
         let value = self.value(at: valueAddress)
-        if (condition(value)) {
+        if condition(value) {
             let newPointerAddress = Address(position: opcode.position + 2, relativeBase: relativeBase, mode: opcode.mode2)
             newExecutionPointer = self.value(at: newPointerAddress)
         } else {
@@ -68,15 +68,14 @@ class IntcodeComputer: NSObject {
         }
         executionPointer = newExecutionPointer
     }
-    
+
     fileprivate func executeRelativeBaseAdjust(_ opcode: Opcode) {
         let address = Address(position: opcode.position + 1, relativeBase: relativeBase, mode: opcode.mode1)
         let value = self.value(at: address)
         self.relativeBase += value
         executionPointer += 2
     }
-    
-    
+
     fileprivate func value(at position: Int) -> Int {
         if position < program!.count {
             return program![position]
@@ -84,7 +83,7 @@ class IntcodeComputer: NSObject {
             return dynamicMemory[position] ?? 0
         }
     }
-    
+
     fileprivate func set(_ value: Int, at position: Int) {
         if position < program!.count {
             program![position] = value
@@ -92,7 +91,7 @@ class IntcodeComputer: NSObject {
             dynamicMemory[position] = value
         }
     }
-    
+
     fileprivate func value(at address: Address) -> Int {
         switch address.mode {
             case .Inmediate:
@@ -103,7 +102,7 @@ class IntcodeComputer: NSObject {
                 return self.value(at: self.value(at: address.position) + address.relativeBase)
         }
     }
-    
+
     fileprivate func set(_ value: Int, at address: Address) {
         switch address.mode {
             case .Inmediate:
@@ -114,14 +113,14 @@ class IntcodeComputer: NSObject {
                 self.set(value, at: self.value(at: address.position) + address.relativeBase)
         }
     }
-    
+
     fileprivate func executeInstruction() {
-        let opcode = Opcode(position:executionPointer, rawValue:value(at: executionPointer))
+        let opcode = Opcode(position: executionPointer, rawValue: value(at: executionPointer))
         switch opcode.value {
         case 1:
-            executeBinary(opcode, operation:+)
+            executeBinary(opcode, operation: +)
         case 2:
-            executeBinary(opcode, operation:*)
+            executeBinary(opcode, operation: *)
         case 3:
             executeInput(opcode)
         case 4:
@@ -140,7 +139,7 @@ class IntcodeComputer: NSObject {
             assertionFailure("Unknown opcode value")
         }
     }
-    
+
     func run() {
         executionPointer = 0
         while value(at: executionPointer) != 99 {

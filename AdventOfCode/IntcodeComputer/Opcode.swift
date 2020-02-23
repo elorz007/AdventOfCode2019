@@ -14,8 +14,8 @@ struct Opcode {
     let mode1: ParameterMode
     let mode2: ParameterMode
     let mode3: ParameterMode
-    
-    init(position:Int, rawValue:Int) {
+
+    init(position: Int, rawValue: Int) {
         self.position = position
         self.value = rawValue % 100
         let parameterCount = ParameterMode.allCases.count
@@ -25,7 +25,7 @@ struct Opcode {
     }
 }
 
-enum ParameterMode : CaseIterable {
+enum ParameterMode: CaseIterable {
     case Position
     case Inmediate
     case Relative

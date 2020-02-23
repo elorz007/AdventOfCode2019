@@ -25,7 +25,7 @@ class WireParser {
     func parse(_ input: String) -> Wire {
         input.split(separator: ",").map { String($0) }.compactMap { convert($0) }
     }
-    
+
     func convert(_ input: String) -> Instruction? {
         let direction: Direction? = extract(input)
         let steps: UInt? = UInt(input.dropFirst())
@@ -35,7 +35,7 @@ class WireParser {
             return nil
         }
     }
-    
+
     func extract(_ input: String) -> Direction? {
         switch input.first {
         case "U":
@@ -50,7 +50,7 @@ class WireParser {
             return nil
         }
     }
-    
+
 }
 
 struct Point: Hashable {
@@ -70,7 +70,7 @@ typealias Path = Set<Point>
 
 class WireExtender: NSObject {
     func extend(_ wire: Wire) -> Path {
-        var path: Set = [Point(x:0, y:0, stepsTaken: 0)]
+        var path: Set = [Point(x: 0, y: 0, stepsTaken: 0)]
         var x = 0
         var y = 0
         var stepsTaken: UInt = 0
@@ -87,7 +87,7 @@ class WireExtender: NSObject {
                     x = x + 1
                 }
                 stepsTaken += 1
-                path.insert(Point(x:x, y:y, stepsTaken: stepsTaken))
+                path.insert(Point(x: x, y: y, stepsTaken: stepsTaken))
             }
 
         }
@@ -101,8 +101,8 @@ extension Point {
 
 extension Point: Comparable {
     static func < (lhs: Point, rhs: Point) -> Bool {
-        if (lhs.manhattanDistance == rhs.manhattanDistance) {
-            if (lhs.x == rhs.x) {
+        if lhs.manhattanDistance == rhs.manhattanDistance {
+            if lhs.x == rhs.x {
                 return lhs.y < rhs.y
             } else {
                 return lhs.x < rhs.x
@@ -128,7 +128,7 @@ class PathActions: NSObject {
         let intersectionsFromPath1 = path1.intersection(path2).sorted()
         let intersectionsFromPath2 = path2.intersection(path1).sorted()
         return zip(intersectionsFromPath1, intersectionsFromPath2).map { (p1: Point, p2: Point ) -> (Point) in
-            return Point(x:p1.x, y:p1.y, stepsTaken: p1.stepsTaken + p2.stepsTaken)
+            return Point(x: p1.x, y: p1.y, stepsTaken: p1.stepsTaken + p2.stepsTaken)
         }.sorted { $0.stepsTaken < $1.stepsTaken }[safe: 1]
     }
 }
@@ -137,31 +137,31 @@ class Day3: NSObject {
     func input() -> String {
         try! String(contentsOfFile: "./Day3.txt")
     }
-    
+
     func pathsFrom(input: String) -> (Path, Path) {
         let rawWires = input.split(separator: "\n")
         let wireParser = WireParser()
         let wire1 = wireParser.parse(String(rawWires[0]))
         let wire2 = wireParser.parse(String(rawWires[1]))
-        
+
         let wireExtender = WireExtender()
         let path1 = wireExtender.extend(wire1)
         let path2 = wireExtender.extend(wire2)
         return (path1, path2)
     }
-    
+
     func mahattanDistanceOfClosestIntersection() -> UInt {
         let (path1, path2) = pathsFrom(input: input())
         let pathActions = PathActions()
         let closestIntersection = pathActions.closestIntersection(path1, path2)
         return closestIntersection!.manhattanDistance
     }
-    
+
     func stepsOfFastestIntersection() -> UInt {
         let (path1, path2) = pathsFrom(input: input())
         let pathActions = PathActions()
         let fastestIntersection = pathActions.fastestIntersection(path1, path2)
         return fastestIntersection!.stepsTaken
     }
-    
+
 }

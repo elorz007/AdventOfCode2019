@@ -37,15 +37,15 @@ extension Password {
         }
         var current: Element?
         current = iterator.next()
-        while (current != nil) {
-            if (current == previous) {
+        while current != nil {
+            if current == previous {
                 var partOfLargerGroup = false
                 current = iterator.next()
                 while current != nil, current == previous {
                     partOfLargerGroup = true
                     current = iterator.next()
                 }
-                if (!partOfLargerGroup) {
+                if !partOfLargerGroup {
                     return true
                 }
             }
@@ -64,7 +64,7 @@ class PasswordChecker: NSObject {
         let containsDouble = password.containsValidDouble()
         return neverDecreases && containsDouble
     }
-    
+
 }
 
 class Day4: NSObject {
@@ -73,7 +73,7 @@ class Day4: NSObject {
         let checker = PasswordChecker()
         for passwordNumber in 284639...748759 {
             let password = String(passwordNumber).map { Digit(String($0))! }
-            if (checker.isValid(password)) {
+            if checker.isValid(password) {
                 count += 1
             }
         }

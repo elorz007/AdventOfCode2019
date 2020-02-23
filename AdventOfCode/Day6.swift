@@ -9,12 +9,12 @@
 import Cocoa
 
 class Node<T> {
-    var value:T
+    var value: T
     var children: [Node] = []
     var depth: UInt = 0
     weak var nextSibling: Node?
     weak var parent: Node?
-    init(_ value:T) {
+    init(_ value: T) {
         self.value = value
     }
     func add(child: Node) {
@@ -36,8 +36,8 @@ extension Node {
 }
 
 extension Node where T: Equatable {
-    
-    func shortestPathLength(_ node1: Node,_ node2: Node) -> UInt {
+
+    func shortestPathLength(_ node1: Node, _ node2: Node) -> UInt {
         var result = UInt.max
         if let commonAncestor = commonAncestor(node1, node2) {
             let node1Depth = node1.depth
@@ -63,7 +63,7 @@ extension Node where T: Equatable {
         }
         return commonAncestor
     }
-    
+
     func strippedTree() -> Node {
         var strippedCurrentNode = Node(self.value)
         var currentNode: Node? = self.parent
@@ -103,7 +103,7 @@ struct TreeDepthIterator<T>: IteratorProtocol {
     init(_ node: Node<T>) {
         self.node = node
     }
-    
+
     mutating func next() -> Element? {
         let result = self.node
         if let node = self.node {
@@ -111,7 +111,7 @@ struct TreeDepthIterator<T>: IteratorProtocol {
                 self.node = node.children.first
             } else {
                 var findNext = node
-                while findNext.nextSibling == nil , findNext.parent != nil {
+                while findNext.nextSibling == nil, findNext.parent != nil {
                     findNext = findNext.parent!
                 }
                 self.node = findNext.nextSibling
@@ -121,17 +121,15 @@ struct TreeDepthIterator<T>: IteratorProtocol {
     }
 }
 
-
 class Day6: NSObject {
     func input() -> String {
         try! String(contentsOfFile: "./Day6.txt")
     }
-    
+
     func split(_ input: String) -> [String] {
         input.split { $0.isNewline }.map { String($0) }
     }
-    
-    
+
     func buildTree(_ input: String) -> Tree<String> {
         let tree = Node("COM")
         var lines = split(input)
@@ -140,7 +138,7 @@ class Day6: NSObject {
                 let nodeValues = line.split(separator: ")").map { String($0) }
                 let leftNodeValue = nodeValues[0]
                 let rightNodeValue = nodeValues[1]
-                
+
                 if let foundNode = tree.first(where: { leftNodeValue == $0.value }) {
                     foundNode.add(child: Node(rightNodeValue))
                     lines.remove(at: index)
@@ -149,15 +147,15 @@ class Day6: NSObject {
         }
         return tree
     }
-    
+
     func totalOrbits() -> UInt {
         return buildTree(input()).totalDepth()
     }
-    
+
     func minimumOrbitalTransfers() -> UInt {
         let tree = buildTree(input())
-        let you = tree.first{ $0.value == "YOU" }!
-        let san = tree.first{ $0.value == "SAN" }!
+        let you = tree.first { $0.value == "YOU" }!
+        let san = tree.first { $0.value == "SAN" }!
         return tree.shortestPathLength(you, san)
     }
 }

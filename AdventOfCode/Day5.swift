@@ -12,15 +12,15 @@ class Day5: NSObject {
     func input() -> String {
         try! String(contentsOfFile: "./Day5.txt")
     }
-    
+
     func inputProgram() -> Program {
-        return input().split(separator:",").map {
+        return input().split(separator: ",").map {
             let s = String($0)
             let i = Int(s)!
             return i
         }
     }
-    
+
     func finalOutput() -> Int {
         let computer = IntcodeComputer()
         computer.program = inputProgram()
@@ -30,7 +30,7 @@ class Day5: NSObject {
         computer.run()
         return finalOutput
     }
-    
+
     func diagnosticCodeThermalRadiator() -> Int {
         let computer = IntcodeComputer()
         computer.program = inputProgram()

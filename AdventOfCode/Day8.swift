@@ -8,7 +8,6 @@
 
 import Cocoa
 
-
 struct Dimension {
     static let PasswordImage = Dimension(width: 25, height: 6)
     let width: Int
@@ -26,7 +25,7 @@ struct Image<T> {
         self.dimension = dimension
     }
     init(layers: [Layer<T>]) {
-        self.init(layers:layers, dimension:Dimension(width: 0, height: 0))
+        self.init(layers: layers, dimension: Dimension(width: 0, height: 0))
     }
 }
 
@@ -52,19 +51,19 @@ class CharacterToColorValueTransformer: ValueTransformer {
     }
 }
 
-class ImageReader<Transformer> where Transformer : ValueTransformer, Transformer.Source == String.Element {
+class ImageReader<Transformer> where Transformer: ValueTransformer, Transformer.Source == String.Element {
     let target: Dimension
     let transformer: Transformer
     init(transformer: Transformer, target: Dimension) {
         self.transformer = transformer
         self.target = target
     }
-    func read(_ input:String) -> Image<Transformer.Destination> {
+    func read(_ input: String) -> Image<Transformer.Destination> {
         var layers = [Layer<Transformer.Destination>]()
         var currentLayer = Layer<Transformer.Destination>()
         for (index, char) in input.enumerated() {
             currentLayer.append(transformer.transform(value: char))
-            if ((index + 1) % target.total == 0) {
+            if (index + 1) % target.total == 0 {
                 layers.append(currentLayer)
                 currentLayer = Layer()
             }
@@ -73,28 +72,24 @@ class ImageReader<Transformer> where Transformer : ValueTransformer, Transformer
     }
 }
 
-
-
 extension ImageReader where Transformer == CharacterToIntValueTransformer {
     convenience init(target: Dimension = Dimension.PasswordImage) {
-        self.init(transformer: CharacterToIntValueTransformer(), target:target)
+        self.init(transformer: CharacterToIntValueTransformer(), target: target)
     }
 }
 extension ImageReader where Transformer == CharacterToColorValueTransformer {
     convenience init(target: Dimension = Dimension.PasswordImage) {
-        self.init(transformer: CharacterToColorValueTransformer(), target:target)
+        self.init(transformer: CharacterToColorValueTransformer(), target: target)
     }
 }
 typealias DefaultImageReader = ImageReader<CharacterToIntValueTransformer>
 typealias ColorImageReader = ImageReader<CharacterToColorValueTransformer>
 
-
-
-extension Layer where Element : Numeric {
+extension Layer where Element: Numeric {
     func numberOfZeroes() -> Int {
         numberOf(0)
     }
-    
+
     func numberOfOnes() -> Int {
         numberOf(1)
     }
@@ -102,13 +97,13 @@ extension Layer where Element : Numeric {
     func numberOfTwos() -> Int {
         numberOf(2)
     }
-    
+
     func numberOf(_ toCheck: Element) -> Int {
         self.filter { $0 == toCheck}.count
     }
 }
 
-extension Image where T : Numeric {
+extension Image where T: Numeric {
     func layerWithFewestZeroes() -> Layer<T>? {
         self.layers.min { a, b in a.numberOfZeroes() < b.numberOfZeroes() }
     }
@@ -124,12 +119,12 @@ extension Image where T: Numeric {
     }
 }
 
-enum Color: Int  {
+enum Color: Int {
     case black = 0
     case white = 1
     case transparent = 2
 }
-extension Color : CustomStringConvertible {
+extension Color: CustomStringConvertible {
     var description: String {
         var result: String
         switch self {
@@ -157,16 +152,16 @@ extension Image where T == Color {
             }
             renderedLayer.append(finalColor)
         }
-        return Image(layers: [renderedLayer], dimension:dimension)
+        return Image(layers: [renderedLayer], dimension: dimension)
     }
-    
+
     func print() {
         self.layers.first!.print(with: dimension)
     }
 }
 
 extension Layer where Element == Color {
-    func print(with dimension:Dimension) {
+    func print(with dimension: Dimension) {
         for y in 0..<dimension.height {
             for x in 0..<dimension.width {
                 let index = y * dimension.width + x
@@ -179,17 +174,17 @@ extension Layer where Element == Color {
 }
 
 class Day8: NSObject {
-    
+
     func checksumOfPasswordImage() -> Int {
         let image = DefaultImageReader().read(input())
         return image.checksum()
     }
-    
+
     func printPasswordImage() {
         let image = ColorImageReader().read(input())
         image.render().print()
     }
-    
+
     func input() -> String {
         try! String(contentsOfFile: "./Day8.txt").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }

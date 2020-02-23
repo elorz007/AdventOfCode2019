@@ -19,31 +19,30 @@ class Day6Tests: XCTestCase {
         let tree = sampleTree()
         XCTAssertEqual("\(tree)", "Ford {Mustang {GT}, Mondeo, Focus {EcoBoost, EcoBlue, ST, RS {WRC}}}")
     }
-    
+
     func testNodesCanBeIteratedByDefaultDepthFirst() {
         let tree = sampleTree()
-        var all: Array<String> = []
+        var all: [String] = []
         tree.forEach { all.append($0.value) }
         XCTAssertEqual(all, ["Ford", "Mustang", "GT", "Mondeo", "Focus", "EcoBoost", "EcoBlue", "ST", "RS", "WRC"])
     }
-    
+
     func testTreeDepthIsSameForAllChildren() {
         let tree = sampleTree()
         tree.children.forEach { XCTAssertEqual($0.depth, 1) }
     }
-    
-    
+
     func testTreeDepthIsCalculated() {
         let tree = sampleTree()
         let wrc = tree.first { $0.value == "WRC" }!
         XCTAssertEqual(wrc.depth, 3)
     }
-    
+
     func testTreeDepthIs0ForRoot() {
         let tree = sampleTree()
         XCTAssertEqual(tree.depth, 0)
     }
-    
+
     func testTotalTreeDepthCanBeCalculated() {
         let tree = sampleTree()
         XCTAssertEqual(tree.totalDepth(), 16)
@@ -54,72 +53,72 @@ class Day6Tests: XCTestCase {
         let tree = adventOfCodeExample()
         XCTAssertEqual(tree.totalDepth(), 42)
     }
-    
+
     // MARK: -
     func testExampleInputCanBeRead() {
         let d6 = Day6()
         let tree = d6.buildTree("COM)B\nB)C\nC)D\nD)E\nE)F\nB)G\nG)H\nD)I\nE)J\nJ)K\nK)L")
         XCTAssertEqual(tree.totalDepth(), 42)
     }
-    
+
     func testSingleLineInputCanBeReadWhenComIsNotFirst() {
         let d6 = Day6()
         let tree = d6.buildTree("C)D\nCOM)B\nB)C\nD)E")
         XCTAssertEqual(tree.children.first?.children.first?.children.first?.children.first?.value, "E")
     }
-    
+
     func test_SLOW_TotalOrbits() {
         let d6 = Day6()
         XCTAssertEqual(d6.totalOrbits(), 106065)
     }
-    
+
     // MARK: - Orbital transfer
     func testStrippedTreeFindsDirectPathToRoot() {
         let tree = ancestorExample()
-        let you = tree.first{ $0.value == "YOU" }
+        let you = tree.first { $0.value == "YOU" }
         let stripped = you!.strippedTree()
-        var all: Array<String> = []
+        var all: [String] = []
         stripped.forEach { all.append($0.value) }
         XCTAssertEqual(all, ["COM", "B", "C", "D", "E", "J", "K", "YOU"])
     }
-    
+
     func testStrippedTreeKeepsDepthProperly() {
         let tree = ancestorExample()
-        let you = tree.first{ $0.value == "YOU" }
+        let you = tree.first { $0.value == "YOU" }
         let stripped = you!.strippedTree()
-        let youStripped = stripped.first{ $0.value == "YOU" }!
+        let youStripped = stripped.first { $0.value == "YOU" }!
         XCTAssertEqual(youStripped.depth, 7)
     }
-    
+
     func testCommonAncestorCanBeFound() {
         let tree = ancestorExample()
-        let you = tree.first{ $0.value == "YOU" }!
-        let san = tree.first{ $0.value == "SAN" }!
+        let you = tree.first { $0.value == "YOU" }!
+        let san = tree.first { $0.value == "SAN" }!
         let ancestor = tree.commonAncestor(you, san)!
         XCTAssertEqual(ancestor.value, "D")
     }
-    
+
     func testShortestPathInExample() {
         let tree = ancestorExample()
-        let you = tree.first{ $0.value == "YOU" }!
-        let san = tree.first{ $0.value == "SAN" }!
+        let you = tree.first { $0.value == "YOU" }!
+        let san = tree.first { $0.value == "SAN" }!
         let shortestPath = tree.shortestPathLength(you, san)
         XCTAssertEqual(shortestPath, 4)
     }
-    
+
     func test_SLOW_MinimumOrbitalTransfers() {
         let d6 = Day6()
         XCTAssertEqual(d6.minimumOrbitalTransfers(), 253)
     }
-    
+
     func sampleTree() -> Tree<String> {
         let ford = Tree<String>("Ford")
         let mustang = Node("Mustang")
         ford.add(child: mustang)
-        mustang.add(child:Node("GT"))
+        mustang.add(child: Node("GT"))
         ford.add(child: Node("Mondeo"))
         let focus = Node("Focus")
-        ford.add(child:focus)
+        ford.add(child: focus)
         focus.add(child: Node("EcoBoost"))
         focus.add(child: Node("EcoBlue"))
         focus.add(child: Node("ST"))
@@ -128,7 +127,7 @@ class Day6Tests: XCTestCase {
         rs.add(child: Node("WRC"))
         return ford
     }
-    
+
     func adventOfCodeExample() -> Tree<String> {
         let com = Tree<String>("COM")
         let b = Node("B")
