@@ -13,6 +13,21 @@ opt_in_rules: # some rules are only opt-in
   - identical_operands
   - unavailable_function
   - overridden_super_call
+  - xct_specific_matcher
+  - yoda_condition
+  - unused_import
+  - array_init
+  - trailing_closure
+  - sorted_first_last
+  - redundant_nil_coalescing
+  - redundant_type_annotation
+  - required_enum_case
+  - implicitly_unwrapped_optional
+  - flatmap_over_map_reduce
+  - file_name_no_space
+  - discouraged_optional_collection
+  - contains_over_filter_is_empty
+  - contains_over_filter_count
   # See all: https://realm.github.io/SwiftLint/rule-directory.html
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods

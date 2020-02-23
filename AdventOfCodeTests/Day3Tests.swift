@@ -101,7 +101,7 @@ class Day3Tests: XCTestCase {
 
         let extender = WireExtender()
         let result = extender.extend(wire)
-        XCTAssertEqual(result.sorted { $0.stepsTaken < $1.stepsTaken }.last!.stepsTaken, 9)
+        XCTAssertEqual(result.max { $0.stepsTaken < $1.stepsTaken }!.stepsTaken, 9)
     }
 
     func assert(wire: Wire, extendsTo path: Path) {
