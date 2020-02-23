@@ -2,11 +2,18 @@
 disabled_rules: # rule identifiers to exclude from running
   - variable_name
 opt_in_rules: # some rules are only opt-in
-  # - control_statement
-  # - empty_count
-  # - trailing_newline
-  # - colon
-  # - comma
+  # Many from https://www.avanderlee.com/optimization/swiftlint-optin-rules/
+  - empty_count
+  - empty_string
+  - first_where
+  - modifier_order
+  - toggle_bool
+  - unused_private_declaration
+  - fallthrough
+  - identical_operands
+  - unavailable_function
+  - overridden_super_call
+  # See all: https://realm.github.io/SwiftLint/rule-directory.html
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
 

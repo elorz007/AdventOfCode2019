@@ -135,7 +135,7 @@ class Day6: NSObject {
     func buildTree(_ input: String) -> Tree<String> {
         let tree = Node("COM")
         var lines = split(input)
-        while lines.count > 0 {
+        while lines.isEmpty {
              // .reversed() is mandatory or else the index that are deleted won't be valid
             for (index, line) in lines.enumerated().reversed() {
                 let nodeValues = line.split(separator: ")").map { String($0) }

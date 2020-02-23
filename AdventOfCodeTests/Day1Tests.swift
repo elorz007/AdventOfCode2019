@@ -10,12 +10,6 @@ import XCTest
 
 class Day1Tests: XCTestCase {
 
-    override func setUp() {
-    }
-
-    override func tearDown() {
-    }
-
     func testMass12() {
         let calculator = FuelCalculator()
         let result = calculator.fuel(mass: 12)
