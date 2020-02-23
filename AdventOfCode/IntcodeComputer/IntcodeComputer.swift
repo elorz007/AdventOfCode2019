@@ -58,10 +58,12 @@ class IntcodeComputer: NSObject {
 
     fileprivate func executeJump(_ opcode: Opcode, condition: (Int) -> Bool) {
         var newExecutionPointer = opcode.position
-        let valueAddress = Address(position: opcode.position + 1, relativeBase: relativeBase, mode: opcode.mode1)
+        let valuePosition = opcode.position + 1
+        let valueAddress = Address(position: valuePosition, relativeBase: relativeBase, mode: opcode.mode1)
         let value = self.value(at: valueAddress)
         if condition(value) {
-            let newPointerAddress = Address(position: opcode.position + 2, relativeBase: relativeBase, mode: opcode.mode2)
+            let newPosition = opcode.position + 2
+            let newPointerAddress = Address(position: newPosition, relativeBase: relativeBase, mode: opcode.mode2)
             newExecutionPointer = self.value(at: newPointerAddress)
         } else {
             newExecutionPointer += 3
@@ -94,23 +96,23 @@ class IntcodeComputer: NSObject {
 
     fileprivate func value(at address: Address) -> Int {
         switch address.mode {
-            case .Inmediate:
-                return self.value(at: address.position)
-            case .Position:
-                return self.value(at: self.value(at: address.position))
-            case .Relative:
-                return self.value(at: self.value(at: address.position) + address.relativeBase)
+        case .Inmediate:
+            return self.value(at: address.position)
+        case .Position:
+            return self.value(at: self.value(at: address.position))
+        case .Relative:
+            return self.value(at: self.value(at: address.position) + address.relativeBase)
         }
     }
 
     fileprivate func set(_ value: Int, at address: Address) {
         switch address.mode {
-            case .Inmediate:
-                assertionFailure("Address in immediate mode cannot be used to set")
-            case .Position:
-                self.set(value, at: self.value(at: address.position))
-            case .Relative:
-                self.set(value, at: self.value(at: address.position) + address.relativeBase)
+        case .Inmediate:
+            assertionFailure("Address in immediate mode cannot be used to set")
+        case .Position:
+            self.set(value, at: self.value(at: address.position))
+        case .Relative:
+            self.set(value, at: self.value(at: address.position) + address.relativeBase)
         }
     }
 
@@ -148,15 +150,14 @@ class IntcodeComputer: NSObject {
     }
 }
 
-fileprivate struct Address {
+private struct Address {
     let position: Int
     let relativeBase: Int
     let mode: ParameterMode
 }
 
-fileprivate struct BinaryInstructionDescription {
+private struct BinaryInstructionDescription {
     let address1: Address
     let address2: Address
     let result: Address
 }
-

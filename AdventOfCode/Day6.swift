@@ -49,13 +49,13 @@ extension Node where T: Equatable {
         }
         return result
     }
-    
-    func commonAncestor(_ node1: Node,_ node2: Node) -> Node? {
+
+    func commonAncestor(_ node1: Node, _ node2: Node) -> Node? {
         let stripped1 = node1.strippedTree()
         let stripped2 = node2.strippedTree()
         var currentNode1: Node? = stripped1
         var currentNode2: Node? = stripped2
-        var commonAncestor: Node? = nil
+        var commonAncestor: Node?
         while let node1 = currentNode1, let node2 = currentNode2, node1.value == node2.value {
             commonAncestor = node1
             currentNode1 = node1.children.first
@@ -123,7 +123,9 @@ struct TreeDepthIterator<T>: IteratorProtocol {
 
 class Day6: NSObject {
     func input() -> String {
+        // swiftlint:disable force_try
         try! String(contentsOfFile: "./Day6.txt")
+        // swiftlint:enable force_try
     }
 
     func split(_ input: String) -> [String] {
@@ -134,7 +136,8 @@ class Day6: NSObject {
         let tree = Node("COM")
         var lines = split(input)
         while lines.count > 0 {
-            for (index, line) in lines.enumerated().reversed() { // Reversed is mandatory or else the index that are deleted won't be valid
+             // .reversed() is mandatory or else the index that are deleted won't be valid
+            for (index, line) in lines.enumerated().reversed() {
                 let nodeValues = line.split(separator: ")").map { String($0) }
                 let leftNodeValue = nodeValues[0]
                 let rightNodeValue = nodeValues[1]

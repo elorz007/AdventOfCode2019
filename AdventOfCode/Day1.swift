@@ -25,7 +25,9 @@ class FuelCalculator: NSObject {
 
 class Day1: NSObject {
     func input() -> String {
+        // swiftlint:disable force_try
         try! String(contentsOfFile: "./Day1.txt")
+        // swiftlint:enable force_try
     }
 
     func totalFuel() -> Int {

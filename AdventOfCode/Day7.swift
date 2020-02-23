@@ -16,7 +16,7 @@ struct Amplifier {
     mutating func run() {
         var inputs = [phaseSetting, inputSignal]
         computer.input = { inputs.removeFirst() }
-        var output:Int? = nil
+        var output: Int?
         computer.output = {
             output = $0
         }
@@ -216,7 +216,9 @@ class Day7: NSObject {
     }
 
     func input() -> String {
+        // swiftlint:disable force_try
         try! String(contentsOfFile: "./Day7.txt").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        // swiftlint:enable force_try
     }
 
     lazy var inputCache = input()

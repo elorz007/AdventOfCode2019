@@ -78,13 +78,13 @@ class WireExtender: NSObject {
             for _ in 1...instruction.steps {
                 switch instruction.direction {
                 case .up:
-                    y = y + 1
+                    y += 1
                 case .down:
-                    y = y - 1
+                    y -= 1
                 case .left:
-                    x = x - 1
+                    x -= 1
                 case .right:
-                    x = x + 1
+                    x += 1
                 }
                 stepsTaken += 1
                 path.insert(Point(x: x, y: y, stepsTaken: stepsTaken))
@@ -135,7 +135,9 @@ class PathActions: NSObject {
 
 class Day3: NSObject {
     func input() -> String {
+        // swiftlint:disable force_try
         try! String(contentsOfFile: "./Day3.txt")
+        // swiftlint:enable force_try
     }
 
     func pathsFrom(input: String) -> (Path, Path) {

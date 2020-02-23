@@ -10,7 +10,9 @@ import Cocoa
 
 class Day5: NSObject {
     func input() -> String {
+        // swiftlint:disable force_try
         try! String(contentsOfFile: "./Day5.txt")
+        // swiftlint:enable force_try
     }
 
     func inputProgram() -> Program {

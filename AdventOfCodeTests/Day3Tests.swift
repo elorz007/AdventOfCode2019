@@ -31,7 +31,9 @@ class Day3Tests: XCTestCase {
     }
 
     func testParserCanParseMultipleInstruction() {
-        let expected = [Instruction(direction: .right, steps: 999), Instruction(direction: .down, steps: 123), Instruction(direction: .up, steps: 1)]
+        let expected = [Instruction(direction: .right, steps: 999),
+                        Instruction(direction: .down, steps: 123),
+                        Instruction(direction: .up, steps: 1)]
         assert(input: "R999,D123,U1", isEqualTo: expected)
     }
 
@@ -74,13 +76,29 @@ class Day3Tests: XCTestCase {
     }
 
     func testExtendingWireMultipleInstructions() {
-        let wire = [Instruction(direction: .right, steps: 3), Instruction(direction: .left, steps: 1), Instruction(direction: .up, steps: 2), Instruction(direction: .down, steps: 3)]
-        let expected: Path = [Point(x: 0, y: 0), Point(x: 1, y: 0), Point(x: 2, y: 0), Point(x: 3, y: 0), Point(x: 2, y: 0), Point(x: 2, y: 1), Point(x: 2, y: 2), Point(x: 2, y: 1), Point(x: 2, y: 0), Point(x: 2, y: -1)]
+        let wire = [Instruction(direction: .right, steps: 3),
+                    Instruction(direction: .left, steps: 1),
+                    Instruction(direction: .up, steps: 2),
+                    Instruction(direction: .down, steps: 3)]
+        let expected: Path = [Point(x: 0, y: 0),
+                              Point(x: 1, y: 0),
+                              Point(x: 2, y: 0),
+                              Point(x: 3, y: 0),
+                              Point(x: 2, y: 0),
+                              Point(x: 2, y: 1),
+                              Point(x: 2, y: 2),
+                              Point(x: 2, y: 1),
+                              Point(x: 2, y: 0),
+                              Point(x: 2, y: -1)]
         assert(wire: wire, extendsTo: expected)
     }
 
     func testExtendingWireMultipleInstructionsCalculatesNumberOfSteps() {
-        let wire = [Instruction(direction: .right, steps: 3), Instruction(direction: .left, steps: 1), Instruction(direction: .up, steps: 2), Instruction(direction: .down, steps: 3)]
+        let wire = [Instruction(direction: .right, steps: 3),
+                    Instruction(direction: .left, steps: 1),
+                    Instruction(direction: .up, steps: 2),
+                    Instruction(direction: .down, steps: 3)]
+
         let extender = WireExtender()
         let result = extender.extend(wire)
         XCTAssertEqual(result.sorted { $0.stepsTaken < $1.stepsTaken }.last!.stepsTaken, 9)
@@ -149,8 +167,13 @@ class Day3Tests: XCTestCase {
     }
 
     func testFastestPointWithMultipleIntersections() {
-        let p1: Path = [Point(x: 0, y: 0), Point(x: 1, y: 0, stepsTaken: 100), Point(x: 2, y: 0), Point(x: 0, y: 1, stepsTaken: 3)]
-        let p2: Path = [Point(x: 0, y: 0), Point(x: 0, y: 1, stepsTaken: 2), Point(x: 1, y: 0, stepsTaken: 1)]
+        let p1: Path = [Point(x: 0, y: 0),
+                        Point(x: 1, y: 0, stepsTaken: 100),
+                        Point(x: 2, y: 0),
+                        Point(x: 0, y: 1, stepsTaken: 3)]
+        let p2: Path = [Point(x: 0, y: 0),
+                        Point(x: 0, y: 1, stepsTaken: 2),
+                        Point(x: 1, y: 0, stepsTaken: 1)]
         let pathActions = PathActions()
         let result = pathActions.fastestIntersection(p1, p2)
         let expected = Point(x: 0, y: 1, stepsTaken: 5)
@@ -168,7 +191,9 @@ class Day3Tests: XCTestCase {
 
     func testExampleFromDefinistion2() {
         let d3 = Day3()
+        // swiftlint:disable line_length
         let (path1, path2) = d3.pathsFrom(input: "R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51\nU98,R91,D20,R16,D67,R40,U7,R15,U6,R7")
+        // swiftlint:enable line_length
         let pathActions = PathActions()
         let fastestIntersection = pathActions.fastestIntersection(path1, path2)
         XCTAssertEqual(fastestIntersection!.stepsTaken, 410)

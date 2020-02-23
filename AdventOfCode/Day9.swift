@@ -31,7 +31,9 @@ class Day9: NSObject {
     }
 
     func input() -> String {
+        // swiftlint:disable force_try
         try! String(contentsOfFile: "./Day9.txt").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        // swiftlint:enable force_try
     }
     func read(input: String) -> Program {
         return input.split(separator: ",").map { Int(String($0))! }

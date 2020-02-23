@@ -102,7 +102,7 @@ class Day5Tests: XCTestCase {
         let program = [3, 3, 1107, -1, 8, 3, 4, 3, 99]
         assert(program: program, witInput: 9, outputs: 0)
     }
-    // MARK
+    // MARK: -
     func test_SLOW_JumpsNonZeroPositionMode() {
         let program = [3, 12, 6, 12, 15, 1, 13, 14, 13, 4, 13, 99, -1, 0, 1, 9]
         assert(program: program, witInput: 89, outputs: 1)
@@ -123,6 +123,7 @@ class Day5Tests: XCTestCase {
         assert(program: program, witInput: 0, outputs: 0)
     }
 
+    // swiftlint:disable line_length
     func testLargerExampleBelow8() {
         let program = [3, 21, 1008, 21, 8, 20, 1005, 20, 22, 107, 8, 21, 20, 1006, 20, 31, 1106, 0, 36, 98, 0, 0, 1002, 21, 125, 20, 4, 20, 1105, 1, 46, 104, 999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98, 99]
         assert(program: program, witInput: 7, outputs: 999)
@@ -137,6 +138,7 @@ class Day5Tests: XCTestCase {
         let program = [3, 21, 1008, 21, 8, 20, 1005, 20, 22, 107, 8, 21, 20, 1006, 20, 31, 1106, 0, 36, 98, 0, 0, 1002, 21, 125, 20, 4, 20, 1105, 1, 46, 104, 999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98, 99]
         assert(program: program, witInput: 108, outputs: 1001)
     }
+    // swiftlint:enable line_length
 
     func assert(program: Program, witInput input: Int, outputs output: Int) {
         let computer = IntcodeComputer()

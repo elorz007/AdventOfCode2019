@@ -186,6 +186,8 @@ class Day8: NSObject {
     }
 
     func input() -> String {
+        // swiftlint:disable force_try
         try! String(contentsOfFile: "./Day8.txt").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        // swiftlint:enable force_try
     }
 }
