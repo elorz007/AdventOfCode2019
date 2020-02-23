@@ -42,4 +42,9 @@ class Day9Tests: XCTestCase {
         let d9 = Day9()
         XCTAssertEqual(d9.boostKeyCode(), 2351176124)
     }
+    
+    func testBoostCoordinates() {
+        let d9 = Day9()
+        XCTAssertEqual(d9.boostCoordinates(), 73110)
+    }
 }

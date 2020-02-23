@@ -170,6 +170,8 @@
 		84919DB7239A8D6400877CEE /* AdventOfCodeTests */ = {
 			isa = PBXGroup;
 			children = (
+				84E1A5B723DE42EE00116947 /* AllTests.xctestplan */,
+				84E1A5B823DE433F00116947 /* FastTests.xctestplan */,
 				84919DC3239A8DAB00877CEE /* other */,
 				84A1CC9E23E5D0A70031F550 /* IntcodeComputer */,
 				84919DC1239A8DA200877CEE /* Day1Tests.swift */,
@@ -181,8 +183,6 @@
 				84C61E7023CFC29E008966A1 /* Day7Tests.swift */,
 				846E980623E208A000FB2797 /* Day8Tests.swift */,
 				84A1CC8623E583A60031F550 /* Day9Tests.swift */,
-				84E1A5B723DE42EE00116947 /* AllTests.xctestplan */,
-				84E1A5B823DE433F00116947 /* FastTests.xctestplan */,
 			);
 			path = AdventOfCodeTests;
 			sourceTree = "<group>";

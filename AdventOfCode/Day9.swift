@@ -12,16 +12,24 @@ import Cocoa
 
 class Day9: NSObject {
     
-    func boostKeyCode() -> Int {
+    func runBoostComputer(withInput value: Int) -> Int {
         let computer = IntcodeComputer()
         computer.program = read(input: input())
         computer.input = {
-            return 1
+            return value
         }
         var result = 0
         computer.output = { result = $0 }
         computer.run()
         return result
+    }
+    
+    func boostKeyCode() -> Int {
+        runBoostComputer(withInput: 1)
+    }
+    
+    func boostCoordinates() -> Int {
+        runBoostComputer(withInput: 2)
     }
     
     func input() -> String {

@@ -44,4 +44,5 @@ print("Advent Of Code starting!")
 
 let d9 = Day9()
 print("[Day9] BOOST keykode: " + String(d9.boostKeyCode()))
+print("[Day9] BOOST Coordinates: " + String(d9.boostCoordinates()))
 
