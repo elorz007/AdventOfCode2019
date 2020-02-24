@@ -236,4 +236,8 @@ class Day10Tests: XCTestCase {
         let result = Day10().map(from: text).countMaxAsteroids()
         XCTAssertEqual(result, 210)
     }
+
+    func testDay10Part1() {
+        XCTAssertEqual(Day10().maxAsteroids(), 282)
+    }
 }
