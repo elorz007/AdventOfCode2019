@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		846AAA9024034CF2006E1B18 /* Day10.txt in Resources */ = {isa = PBXBuildFile; fileRef = 846AAA8F24034CF2006E1B18 /* Day10.txt */; };
+		846AAA9124034D1D006E1B18 /* Day10.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 846AAA8F24034CF2006E1B18 /* Day10.txt */; };
 		846E980723E208A000FB2797 /* Day8Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846E980623E208A000FB2797 /* Day8Tests.swift */; };
 		846E980923E208B600FB2797 /* Day8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846E980823E208B600FB2797 /* Day8.swift */; };
 		846E980A23E208BC00FB2797 /* Day8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846E980823E208B600FB2797 /* Day8.swift */; };
@@ -30,6 +32,9 @@
 		84A1CC9C23E5D04D0031F550 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1CC9B23E5D04D0031F550 /* Opcode.swift */; };
 		84A1CC9D23E5D04D0031F550 /* Opcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1CC9B23E5D04D0031F550 /* Opcode.swift */; };
 		84A1CCA123E5D0BB0031F550 /* OpcodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1CC9F23E5D0BB0031F550 /* OpcodeTests.swift */; };
+		84A1CCA42402B9160031F550 /* Day10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1CCA32402B9160031F550 /* Day10.swift */; };
+		84A1CCA624033A9C0031F550 /* Day10Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1CCA524033A9C0031F550 /* Day10Tests.swift */; };
+		84A1CCA724033ADA0031F550 /* Day10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1CCA32402B9160031F550 /* Day10.swift */; };
 		84AB8576239AACE40036871B /* Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB8575239AACE40036871B /* Day2.swift */; };
 		84AB8578239AB3730036871B /* Day2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB8577239AB3730036871B /* Day2Tests.swift */; };
 		84AB8579239B3EA70036871B /* Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB8575239AACE40036871B /* Day2.swift */; };
@@ -63,6 +68,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				846AAA9124034D1D006E1B18 /* Day10.txt in CopyFiles */,
 				84A1CC8D23E583FF0031F550 /* Day9.txt in CopyFiles */,
 				846E980D23E2091800FB2797 /* Day8.txt in CopyFiles */,
 				84C61E7523D10ABE008966A1 /* Day7.txt in CopyFiles */,
@@ -76,6 +82,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		846AAA8F24034CF2006E1B18 /* Day10.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Day10.txt; sourceTree = "<group>"; };
 		846E980623E208A000FB2797 /* Day8Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day8Tests.swift; sourceTree = "<group>"; };
 		846E980823E208B600FB2797 /* Day8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day8.swift; sourceTree = "<group>"; };
 		846E980B23E2090100FB2797 /* Day8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Day8.txt; sourceTree = "<group>"; };
@@ -92,6 +99,8 @@
 		84A1CC9223E584630031F550 /* IntcodeComputer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntcodeComputer.swift; sourceTree = "<group>"; };
 		84A1CC9B23E5D04D0031F550 /* Opcode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Opcode.swift; sourceTree = "<group>"; };
 		84A1CC9F23E5D0BB0031F550 /* OpcodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpcodeTests.swift; sourceTree = "<group>"; };
+		84A1CCA32402B9160031F550 /* Day10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day10.swift; sourceTree = "<group>"; };
+		84A1CCA524033A9C0031F550 /* Day10Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day10Tests.swift; sourceTree = "<group>"; };
 		84AB8575239AACE40036871B /* Day2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day2.swift; sourceTree = "<group>"; };
 		84AB8577239AB3730036871B /* Day2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day2Tests.swift; sourceTree = "<group>"; };
 		84AB857A239BF1380036871B /* Day3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day3.swift; sourceTree = "<group>"; };
@@ -163,6 +172,7 @@
 				84C61E6E23CFBB7E008966A1 /* Day7.swift */,
 				846E980823E208B600FB2797 /* Day8.swift */,
 				84A1CC8823E583B10031F550 /* Day9.swift */,
+				84A1CCA32402B9160031F550 /* Day10.swift */,
 			);
 			path = AdventOfCode;
 			sourceTree = "<group>";
@@ -183,6 +193,7 @@
 				84C61E7023CFC29E008966A1 /* Day7Tests.swift */,
 				846E980623E208A000FB2797 /* Day8Tests.swift */,
 				84A1CC8623E583A60031F550 /* Day9Tests.swift */,
+				84A1CCA524033A9C0031F550 /* Day10Tests.swift */,
 			);
 			path = AdventOfCodeTests;
 			sourceTree = "<group>";
@@ -205,6 +216,7 @@
 				84C61E7323D10AB4008966A1 /* Day7.txt */,
 				846E980B23E2090100FB2797 /* Day8.txt */,
 				84A1CC8B23E583F50031F550 /* Day9.txt */,
+				846AAA8F24034CF2006E1B18 /* Day10.txt */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -312,6 +324,7 @@
 				84C61E6C23CB3575008966A1 /* Day6.txt in Resources */,
 				84A1CC8C23E583F50031F550 /* Day9.txt in Resources */,
 				84C61E7423D10AB4008966A1 /* Day7.txt in Resources */,
+				846AAA9024034CF2006E1B18 /* Day10.txt in Resources */,
 				846E980C23E2090100FB2797 /* Day8.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,7 +347,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint autocorrect\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -345,6 +358,7 @@
 			files = (
 				84A1CC9323E584630031F550 /* IntcodeComputer.swift in Sources */,
 				84919DBF239A8D9000877CEE /* Day1.swift in Sources */,
+				84A1CCA42402B9160031F550 /* Day10.swift in Sources */,
 				84AB8583239C3B570036871B /* Day4.swift in Sources */,
 				84C61E6F23CFBB7E008966A1 /* Day7.swift in Sources */,
 				84AB8576239AACE40036871B /* Day2.swift in Sources */,
@@ -363,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84919DC0239A8D9000877CEE /* Day1.swift in Sources */,
+				84A1CCA624033A9C0031F550 /* Day10Tests.swift in Sources */,
 				84AB857C239BF1380036871B /* Day3.swift in Sources */,
 				84A1CC9423E584630031F550 /* IntcodeComputer.swift in Sources */,
 				84C61E7223CFC3A2008966A1 /* Day7.swift in Sources */,
@@ -377,6 +392,7 @@
 				846E980723E208A000FB2797 /* Day8Tests.swift in Sources */,
 				84919DC2239A8DA200877CEE /* Day1Tests.swift in Sources */,
 				846E980A23E208BC00FB2797 /* Day8.swift in Sources */,
+				84A1CCA724033ADA0031F550 /* Day10.swift in Sources */,
 				84A1CCA123E5D0BB0031F550 /* OpcodeTests.swift in Sources */,
 				84AB8578239AB3730036871B /* Day2Tests.swift in Sources */,
 				84AB8594239EEEA60036871B /* Day6Tests.swift in Sources */,

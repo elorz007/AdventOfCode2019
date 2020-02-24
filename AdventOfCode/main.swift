@@ -42,6 +42,9 @@ print("Advent Of Code starting!")
 //print("[Day8] Password: ")
 //d8.printPasswordImage()
 
-let d9 = Day9()
-print("[Day9] BOOST keykode: " + String(d9.boostKeyCode()))
-print("[Day9] BOOST Coordinates: " + String(d9.boostCoordinates()))
+//let d9 = Day9()
+//print("[Day9] BOOST keykode: " + String(d9.boostKeyCode()))
+//print("[Day9] BOOST Coordinates: " + String(d9.boostCoordinates()))
+
+let d10 = Day10()
+print("[Day10] Max asteroids: " + String(d10.maxAsteroids()))
