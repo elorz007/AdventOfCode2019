@@ -55,6 +55,61 @@ class Day10Tests: XCTestCase {
         XCTAssertEqual(vector1.angle(), vector2.angle(), accuracy: 0.0000001)
     }
 
+    func testRightVectorHasAngle0() {
+        let origin = Position(x: 0, y: 0)
+        let target = Position(x: 1, y: 0)
+        let vector = Vector(a: origin, b: target)
+        XCTAssertEqual(vector.angle(), 0, accuracy: 0.0000001)
+    }
+
+    func testDownVectorHasAnglePi2() {
+        let origin = Position(x: 0, y: 0)
+        let target = Position(x: 0, y: 1)
+        let vector = Vector(a: origin, b: target)
+        XCTAssertEqual(vector.angle(), .pi / 2, accuracy: 0.00001)
+    }
+
+    func testLeftVectorHasAnglePi() {
+        let origin = Position(x: 1, y: 0)
+        let target = Position(x: 0, y: 0)
+        let vector = Vector(a: origin, b: target)
+        XCTAssertEqual(vector.angle(), .pi, accuracy: 0.00001)
+    }
+
+    func testUpVectorHasAngleMinusPi2() {
+        let origin = Position(x: 0, y: 1)
+        let target = Position(x: 0, y: 0)
+        let vector = Vector(a: origin, b: target)
+        XCTAssertEqual(vector.angle(), -.pi / 2, accuracy: 0.00001)
+    }
+
+    func testRightVectorRotatedUpHasAnglePi2() {
+        let origin = Position(x: 0, y: 0)
+        let target = Position(x: 1, y: 0)
+        let vector = Vector(a: origin, b: target)
+        XCTAssertEqual(vector.angle().rotatedUp(), .pi / 2, accuracy: 0.0000001)
+    }
+
+    func testDownVectorRotatedUpHasAnglePi() {
+        let origin = Position(x: 0, y: 0)
+        let target = Position(x: 0, y: 1)
+        let vector = Vector(a: origin, b: target)
+        XCTAssertEqual(vector.angle().rotatedUp(), .pi, accuracy: 0.00001)
+    }
+
+    func testLeftVectorRotatedUpHasAngle3Pi2() {
+        let origin = Position(x: 1, y: 0)
+        let target = Position(x: 0, y: 0)
+        let vector = Vector(a: origin, b: target)
+        XCTAssertEqual(vector.angle().rotatedUp(), 3 * .pi / 2, accuracy: 0.00001)
+    }
+
+    func testUpVectorRotatedUpHasAngle0() {
+        let origin = Position(x: 0, y: 1)
+        let target = Position(x: 0, y: 0)
+        let vector = Vector(a: origin, b: target)
+        XCTAssertEqual(vector.angle().rotatedUp(), 0, accuracy: 0.00001)
+    }
     // MARK: - Visible asteroids
     func testTwoAsteroidsInLineOfSightAreCountedAsOne() {
         let origin = Position(x: 0, y: 0)
@@ -62,7 +117,7 @@ class Day10Tests: XCTestCase {
         let tile2 = Tile(object: .asteroid, position: Position(x: 1, y: 0))
         let tile3 = Tile(object: .asteroid, position: Position(x: 10, y: 0))
         let map = [tile1, tile2, tile3]
-        let result = map.asteroidsVisible(in: origin)
+        let result = map.countVisibleAsteroids(from: origin)
         XCTAssertEqual(result, 1)
     }
 
@@ -75,7 +130,7 @@ class Day10Tests: XCTestCase {
         let tile5 = Tile(object: .asteroid, position: Position(x: 100, y: 200))
 
         let map = [tile1, tile2, tile3, tile4, tile5]
-        let result = map.asteroidsVisible(in: origin)
+        let result = map.countVisibleAsteroids(from: origin)
         XCTAssertEqual(result, 1)
     }
 
@@ -239,5 +294,79 @@ class Day10Tests: XCTestCase {
 
     func testDay10Part1() {
         XCTAssertEqual(Day10().maxAsteroids(), 282)
+    }
+
+    // MARK: - Part two
+    func testAllVisibleAsteroidsCanBeSeparated() {
+        let text = """
+            .#....#####...#..
+            ##...##.#####..##
+            ##...#...#.#####.
+            ..#.....#...###..
+            ..#.#.....#....##
+            """
+        let expected = [Tile(object: .asteroid, position: Position(x: 8, y: 1)),
+            Tile(object: .asteroid, position: Position(x: 9, y: 0)),
+            Tile(object: .asteroid, position: Position(x: 9, y: 1)),
+            Tile(object: .asteroid, position: Position(x: 10, y: 0)),
+            Tile(object: .asteroid, position: Position(x: 9, y: 2)),
+            Tile(object: .asteroid, position: Position(x: 11, y: 1)),
+            Tile(object: .asteroid, position: Position(x: 12, y: 1)),
+            Tile(object: .asteroid, position: Position(x: 11, y: 2)),
+            Tile(object: .asteroid, position: Position(x: 15, y: 1)),
+            Tile(object: .asteroid, position: Position(x: 12, y: 2)),
+            Tile(object: .asteroid, position: Position(x: 13, y: 2)),
+            Tile(object: .asteroid, position: Position(x: 14, y: 2)),
+            Tile(object: .asteroid, position: Position(x: 15, y: 2)),
+            Tile(object: .asteroid, position: Position(x: 12, y: 3)),
+            Tile(object: .asteroid, position: Position(x: 16, y: 4)),
+            Tile(object: .asteroid, position: Position(x: 15, y: 4)),
+            Tile(object: .asteroid, position: Position(x: 10, y: 4)),
+            Tile(object: .asteroid, position: Position(x: 4, y: 4)),
+            Tile(object: .asteroid, position: Position(x: 2, y: 4)),
+            Tile(object: .asteroid, position: Position(x: 2, y: 3)),
+            Tile(object: .asteroid, position: Position(x: 0, y: 2)),
+            Tile(object: .asteroid, position: Position(x: 1, y: 2)),
+            Tile(object: .asteroid, position: Position(x: 0, y: 1)),
+            Tile(object: .asteroid, position: Position(x: 1, y: 1)),
+            Tile(object: .asteroid, position: Position(x: 5, y: 2)),
+            Tile(object: .asteroid, position: Position(x: 1, y: 0)),
+            Tile(object: .asteroid, position: Position(x: 5, y: 1)),
+            Tile(object: .asteroid, position: Position(x: 6, y: 1)),
+            Tile(object: .asteroid, position: Position(x: 6, y: 0)),
+            Tile(object: .asteroid, position: Position(x: 7, y: 0))
+        ]
+
+        let result = Day10().map(from: text).allAsteroids().visibleAsteroids(from: Position(x: 8, y: 3))
+
+        XCTAssertEqual(result, expected)
+    }
+
+    func testComplexExample200thAsteroid() {
+        let text = """
+            .#..##.###...#######
+            ##.############..##.
+            .#.######.########.#
+            .###.#######.####.#.
+            #####.##.#.##.###.##
+            ..#####..#.#########
+            ####################
+            #.####....###.#.#.##
+            ##.#################
+            #####.##.###..####..
+            ..######..##.#######
+            ####.##.####...##..#
+            .#####..#.######.###
+            ##...#.##########...
+            #.##########.#######
+            .####.#.###.###.#.##
+            ....##.##.###..#####
+            .#.#.###########.###
+            #.#.#.#####.####.###
+            ###.##.####.##.#..##
+            """
+        let position = Position(x: 11, y: 13)
+        let destroyed = Day10().map(from: text).destroyedAsteroids(from: position)
+        XCTAssertEqual(destroyed[199].position, Position(x: 8, y: 2))
     }
 }

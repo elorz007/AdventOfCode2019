@@ -8,11 +8,14 @@
 
 import Cocoa
 
-struct Position: Equatable {
+struct Position: Equatable, CustomDebugStringConvertible {
     let x: Int
     let y: Int
     static func == (lhs: Position, rhs: Position) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
+    }
+    var debugDescription: String {
+        return "(\(x),\(y))"
     }
 }
 
@@ -21,9 +24,31 @@ struct Vector {
     let b: Position
 }
 
-extension Vector {
+extension Vector: Comparable {
     func angle() -> Float {
         atan2(Float(b.y - a.y), Float(b.x - a.x))
+    }
+
+    func magnitude() -> Float {
+        sqrtf(powf(Float(b.y - a.y), 2) + powf(Float(b.x - a.x), 2))
+    }
+
+    static func < (lhs: Vector, rhs: Vector) -> Bool {
+        lhs.magnitude() < rhs.magnitude()
+    }
+}
+
+extension Float {
+    func rotated(by angle: Float) -> Float {
+        let newAngle = self + angle
+        if newAngle >= -ulp { // >= 0 but taking into account float precission
+            return newAngle
+        } else {
+            return newAngle + 2 * .pi
+        }
+    }
+    func rotatedUp() -> Float {
+        self.rotated(by: .pi / 2)
     }
 }
 
@@ -31,7 +56,18 @@ enum SpaceObject {
     case empty, asteroid
 }
 
-struct Tile: Equatable, Comparable {
+extension SpaceObject: CustomDebugStringConvertible {
+    var debugDescription: String {
+        switch self {
+        case .empty:
+            return "."
+        case .asteroid:
+            return "#"
+        }
+    }
+}
+
+struct Tile: Equatable, Comparable, CustomDebugStringConvertible {
     let object: SpaceObject
     let position: Position
     var visibleAsteroids: Int = 0
@@ -41,6 +77,10 @@ struct Tile: Equatable, Comparable {
     }
     static func < (lhs: Tile, rhs: Tile) -> Bool {
         lhs.visibleAsteroids < rhs.visibleAsteroids
+    }
+
+    var debugDescription: String {
+        return "\(object) \(position)"
     }
 }
 
@@ -58,7 +98,7 @@ extension Map {
     func countAsteroids() -> Map {
         map {
             var tile = $0
-            tile.visibleAsteroids = self.asteroidsVisible(in: tile.position)
+            tile.visibleAsteroids = self.countVisibleAsteroids(from: tile.position)
             return tile
         }
     }
@@ -67,19 +107,40 @@ extension Map {
         self.max { $0 < $1 }?.visibleAsteroids ?? 0
     }
 
-    func asteroidsVisible(in origin: Position) -> Int {
-        var angles = Set<Float>()
-        for tile in self {
-            let vector = Vector(a: origin, b: tile.position)
-            if origin != tile.position {
-                angles.insert(vector.angle())
-            }
-        }
-        return angles.count
+    func countVisibleAsteroids(from origin: Position) -> Int {
+        visibleAsteroids(from: origin).count
     }
 
     func countMaxAsteroids() -> Int {
         self.allAsteroids().countAsteroids().maxAsteroids()
+    }
+
+    func visibleAsteroids(from origin: Position) -> [Tile] {
+        var visibleAsteroids = [Float: Tile]()
+        for tile in self where origin != tile.position {
+            let vector = Vector(a: origin, b: tile.position)
+            let angle = vector.angle().rotatedUp()
+            if let tileInSameDirection = visibleAsteroids[angle] {
+                let vectorInSameDirection = Vector(a: origin, b: tileInSameDirection.position)
+                if vector < vectorInSameDirection {
+                    visibleAsteroids[angle] = tile
+                }
+            } else {
+                visibleAsteroids[angle] = tile
+            }
+        }
+        return visibleAsteroids.sorted { $0.key < $1.key }.map { $0.value }
+    }
+
+    func destroyedAsteroids(from origin: Position) -> [Tile] {
+        var allAsteroids = self.allAsteroids()
+        var allDestroyed = [Tile]()
+        while allAsteroids.count > 1 {
+            let destroyedInThisRotation = allAsteroids.visibleAsteroids(from: origin)
+            allAsteroids = allAsteroids.filter { !destroyedInThisRotation.contains($0) }
+            allDestroyed.append(contentsOf: destroyedInThisRotation)
+        }
+        return allDestroyed
     }
 }
 
@@ -99,6 +160,10 @@ class Day10: NSObject {
     func maxAsteroids() -> Int {
         map(from: input()).countMaxAsteroids()
     }
+
+//    func find200thDestroyed() -> Position {
+//        map(from: input()).visibleAsteroids(from: <#T##Position#>)
+//    }
 
     func input() -> String {
         // swiftlint:disable force_try
