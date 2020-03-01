@@ -369,4 +369,8 @@ class Day10Tests: XCTestCase {
         let destroyed = Day10().map(from: text).destroyedAsteroids(from: position)
         XCTAssertEqual(destroyed[199].position, Position(x: 8, y: 2))
     }
+
+    func testDay10Part2() {
+        XCTAssertEqual(Day10().betAsteroidEncodedPosition(), 1008)
+    }
 }

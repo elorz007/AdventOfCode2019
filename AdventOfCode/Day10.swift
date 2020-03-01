@@ -14,6 +14,11 @@ struct Position: Equatable, CustomDebugStringConvertible {
     static func == (lhs: Position, rhs: Position) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
     }
+
+    var encoded: Int {
+        return x * 100 + y
+    }
+
     var debugDescription: String {
         return "(\(x),\(y))"
     }
@@ -161,9 +166,11 @@ class Day10: NSObject {
         map(from: input()).countMaxAsteroids()
     }
 
-//    func find200thDestroyed() -> Position {
-//        map(from: input()).visibleAsteroids(from: <#T##Position#>)
-//    }
+    func betAsteroidEncodedPosition() -> Int {
+        let destroyedAsteroids = map(from: input()).destroyedAsteroids(from: Position(x: 22, y: 19))
+        let betAsteroid = destroyedAsteroids[199]
+        return betAsteroid.position.encoded
+    }
 
     func input() -> String {
         // swiftlint:disable force_try

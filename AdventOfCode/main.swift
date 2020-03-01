@@ -48,3 +48,4 @@ print("Advent Of Code starting!")
 
 let d10 = Day10()
 print("[Day10] Max asteroids: " + String(d10.maxAsteroids()))
+print("[Day10] Bet asteroid encoded position: " + String(d10.betAsteroidEncodedPosition()))
