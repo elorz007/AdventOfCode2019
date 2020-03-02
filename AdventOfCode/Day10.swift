@@ -8,20 +8,9 @@
 
 import Cocoa
 
-struct Position: Equatable, CustomDebugStringConvertible {
-    let x: Int
-    let y: Int
-
-    static func == (lhs: Position, rhs: Position) -> Bool {
-        return lhs.x == rhs.x && lhs.y == rhs.y
-    }
-
+extension Position {
     var encoded: Int {
         x * 100 + y
-    }
-
-    var debugDescription: String {
-        "(\(x),\(y))"
     }
 }
 
@@ -83,9 +72,9 @@ struct Tile: Equatable, Comparable, CustomDebugStringConvertible {
     }
 }
 
-typealias Map = [Tile]
+typealias AsteroidMap = [Tile]
 
-extension Map {
+extension AsteroidMap {
     init(from stringRepresentation: String) {
         self.init()
         for (y, line) in stringRepresentation.components(separatedBy: .newlines).enumerated() {
@@ -98,15 +87,15 @@ extension Map {
         }
     }
 
-    func filter(equalTo object: SpaceObject) -> Map {
+    func filter(equalTo object: SpaceObject) -> AsteroidMap {
         self.filter { $0.object == object}
     }
 
-    func allAsteroids() -> Map {
+    func allAsteroids() -> AsteroidMap {
         self.filter(equalTo: .asteroid)
     }
 
-    func countAsteroids() -> Map {
+    func countAsteroids() -> AsteroidMap {
         map {
             var tile = $0
             tile.visibleAsteroids = visibleAsteroids(from: tile.position).count
@@ -154,11 +143,11 @@ extension Map {
 class Day10: NSObject {
 
     func maxAsteroids() -> Int {
-        Map(from: input()).countMaxAsteroids()
+        AsteroidMap(from: input()).countMaxAsteroids()
     }
 
     func betAsteroidEncodedPosition() -> Int {
-        let destroyedAsteroids = Map(from: input()).destroyedAsteroids(from: Position(x: 22, y: 19))
+        let destroyedAsteroids = AsteroidMap(from: input()).destroyedAsteroids(from: Position(x: 22, y: 19))
         let betAsteroid = destroyedAsteroids[199]
         return betAsteroid.position.encoded
     }

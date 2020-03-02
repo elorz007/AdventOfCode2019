@@ -119,26 +119,6 @@ extension Image where T: Numeric {
     }
 }
 
-enum Color: Int {
-    case black = 0
-    case white = 1
-    case transparent = 2
-}
-extension Color: CustomStringConvertible {
-    var description: String {
-        var result: String
-        switch self {
-        case .black:
-            result = "⬛"
-        case .white:
-            result = "⬜"
-        case .transparent:
-            result = "🟨"
-        }
-        return result
-    }
-}
-
 extension Image where T == Color {
     func render() -> Image<Color> {
         var renderedLayer = Layer<Color>()

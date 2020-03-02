@@ -8,12 +8,6 @@
 
 import Cocoa
 
-enum Direction {
-    case up
-    case down
-    case left
-    case right
-}
 struct Instruction: Hashable {
     let direction: Direction
     let steps: UInt
@@ -66,6 +60,24 @@ struct Point: Hashable {
     }
 }
 
+extension Point {
+    var manhattanDistance: UInt { UInt(abs(self.x) + abs(self.y)) }
+}
+
+extension Point: Comparable {
+    static func < (lhs: Point, rhs: Point) -> Bool {
+        if lhs.manhattanDistance == rhs.manhattanDistance {
+            if lhs.x == rhs.x {
+                return lhs.y < rhs.y
+            } else {
+                return lhs.x < rhs.x
+            }
+        } else {
+            return lhs.manhattanDistance < rhs.manhattanDistance
+        }
+    }
+}
+
 typealias Path = Set<Point>
 
 class WireExtender: NSObject {
@@ -92,24 +104,6 @@ class WireExtender: NSObject {
 
         }
         return path
-    }
-}
-
-extension Point {
-    var manhattanDistance: UInt { UInt(abs(self.x) + abs(self.y)) }
-}
-
-extension Point: Comparable {
-    static func < (lhs: Point, rhs: Point) -> Bool {
-        if lhs.manhattanDistance == rhs.manhattanDistance {
-            if lhs.x == rhs.x {
-                return lhs.y < rhs.y
-            } else {
-                return lhs.x < rhs.x
-            }
-        } else {
-            return lhs.manhattanDistance < rhs.manhattanDistance
-        }
     }
 }
 

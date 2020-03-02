@@ -197,7 +197,7 @@ class Day10Tests: XCTestCase {
         let tile9 = Tile(object: .empty, position: Position(x: 2, y: 2))
         let expected = [tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9]
 
-        let result = Map(from: text)
+        let result = AsteroidMap(from: text)
 
         XCTAssertEqual(result, expected)
     }
@@ -211,7 +211,7 @@ class Day10Tests: XCTestCase {
             ....#
             ...##
             """
-        let result = Map(from: text).countMaxAsteroids()
+        let result = AsteroidMap(from: text).countMaxAsteroids()
         XCTAssertEqual(result, 8)
     }
 
@@ -228,7 +228,7 @@ class Day10Tests: XCTestCase {
             ##...#..#.
             .#....####
             """
-        let result = Map(from: text).countMaxAsteroids()
+        let result = AsteroidMap(from: text).countMaxAsteroids()
         XCTAssertEqual(result, 33)
     }
 
@@ -245,7 +245,7 @@ class Day10Tests: XCTestCase {
             ......#...
             .####.###.
             """
-        let result = Map(from: text).countMaxAsteroids()
+        let result = AsteroidMap(from: text).countMaxAsteroids()
         XCTAssertEqual(result, 35)
     }
 
@@ -262,7 +262,7 @@ class Day10Tests: XCTestCase {
             .##...##.#
             .....#.#..
             """
-        let result = Map(from: text).countMaxAsteroids()
+        let result = AsteroidMap(from: text).countMaxAsteroids()
         XCTAssertEqual(result, 41)
     }
 
@@ -289,7 +289,7 @@ class Day10Tests: XCTestCase {
             #.#.#.#####.####.###
             ###.##.####.##.#..##
             """
-        let result = Map(from: text).countMaxAsteroids()
+        let result = AsteroidMap(from: text).countMaxAsteroids()
         XCTAssertEqual(result, 210)
     }
 
@@ -338,7 +338,7 @@ class Day10Tests: XCTestCase {
             Tile(object: .asteroid, position: Position(x: 7, y: 0))
         ]
 
-        let result = Map(from: text).allAsteroids().visibleAsteroids(from: Position(x: 8, y: 3))
+        let result = AsteroidMap(from: text).allAsteroids().visibleAsteroids(from: Position(x: 8, y: 3))
 
         XCTAssertEqual(result, expected)
     }
@@ -367,7 +367,7 @@ class Day10Tests: XCTestCase {
             ###.##.####.##.#..##
             """
         let position = Position(x: 11, y: 13)
-        let destroyed = Map(from: text).destroyedAsteroids(from: position)
+        let destroyed = AsteroidMap(from: text).destroyedAsteroids(from: position)
         XCTAssertEqual(destroyed[199].position, Position(x: 8, y: 2))
     }
 
