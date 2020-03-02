@@ -11,25 +11,24 @@ import Cocoa
 struct Position: Equatable, CustomDebugStringConvertible {
     let x: Int
     let y: Int
+
     static func == (lhs: Position, rhs: Position) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
     }
 
     var encoded: Int {
-        return x * 100 + y
+        x * 100 + y
     }
 
     var debugDescription: String {
-        return "(\(x),\(y))"
+        "(\(x),\(y))"
     }
 }
 
-struct Vector {
+struct Vector: Comparable {
     let a: Position
     let b: Position
-}
 
-extension Vector: Comparable {
     func angle() -> Float {
         atan2(Float(b.y - a.y), Float(b.x - a.x))
     }
@@ -52,23 +51,18 @@ extension Float {
             return newAngle + 2 * .pi
         }
     }
+
     func rotatedUp() -> Float {
         self.rotated(by: .pi / 2)
     }
 }
 
-enum SpaceObject {
-    case empty, asteroid
-}
+enum SpaceObject: Character, CustomDebugStringConvertible {
+    case empty = "."
+    case asteroid = "#"
 
-extension SpaceObject: CustomDebugStringConvertible {
     var debugDescription: String {
-        switch self {
-        case .empty:
-            return "."
-        case .asteroid:
-            return "#"
-        }
+        String(rawValue)
     }
 }
 
@@ -78,20 +72,32 @@ struct Tile: Equatable, Comparable, CustomDebugStringConvertible {
     var visibleAsteroids: Int = 0
 
     static func == (lhs: Tile, rhs: Tile) -> Bool {
-        return lhs.object == rhs.object && lhs.position == rhs.position
+        lhs.object == rhs.object && lhs.position == rhs.position
     }
     static func < (lhs: Tile, rhs: Tile) -> Bool {
         lhs.visibleAsteroids < rhs.visibleAsteroids
     }
 
     var debugDescription: String {
-        return "\(object) \(position)"
+        "\(object) \(position)"
     }
 }
 
 typealias Map = [Tile]
 
 extension Map {
+    init(from stringRepresentation: String) {
+        self.init()
+        for (y, line) in stringRepresentation.components(separatedBy: .newlines).enumerated() {
+            for (x, char) in line.enumerated() {
+                if let object = SpaceObject(rawValue: char) {
+                    let tile = Tile(object: object, position: Position(x: x, y: y))
+                    self.append(tile)
+                }
+            }
+        }
+    }
+
     func filter(equalTo object: SpaceObject) -> Map {
         self.filter { $0.object == object}
     }
@@ -103,17 +109,13 @@ extension Map {
     func countAsteroids() -> Map {
         map {
             var tile = $0
-            tile.visibleAsteroids = self.countVisibleAsteroids(from: tile.position)
+            tile.visibleAsteroids = visibleAsteroids(from: tile.position).count
             return tile
         }
     }
 
     func maxAsteroids() -> Int {
         self.max { $0 < $1 }?.visibleAsteroids ?? 0
-    }
-
-    func countVisibleAsteroids(from origin: Position) -> Int {
-        visibleAsteroids(from: origin).count
     }
 
     func countMaxAsteroids() -> Int {
@@ -150,24 +152,13 @@ extension Map {
 }
 
 class Day10: NSObject {
-    func map(from input: String) -> Map {
-        var map = Map()
-        for (y, line) in input.components(separatedBy: .newlines).enumerated() {
-            for (x, char) in line.enumerated() {
-                let object: SpaceObject = char == "#" ? .asteroid : .empty
-                let tile = Tile(object: object, position: Position(x: x, y: y))
-                map.append(tile)
-            }
-        }
-        return map
-    }
 
     func maxAsteroids() -> Int {
-        map(from: input()).countMaxAsteroids()
+        Map(from: input()).countMaxAsteroids()
     }
 
     func betAsteroidEncodedPosition() -> Int {
-        let destroyedAsteroids = map(from: input()).destroyedAsteroids(from: Position(x: 22, y: 19))
+        let destroyedAsteroids = Map(from: input()).destroyedAsteroids(from: Position(x: 22, y: 19))
         let betAsteroid = destroyedAsteroids[199]
         return betAsteroid.position.encoded
     }

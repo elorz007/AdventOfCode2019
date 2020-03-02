@@ -111,13 +111,14 @@ class Day10Tests: XCTestCase {
         XCTAssertEqual(vector.angle().rotatedUp(), 0, accuracy: 0.00001)
     }
     // MARK: - Visible asteroids
+
     func testTwoAsteroidsInLineOfSightAreCountedAsOne() {
         let origin = Position(x: 0, y: 0)
         let tile1 = Tile(object: .asteroid, position: origin)
         let tile2 = Tile(object: .asteroid, position: Position(x: 1, y: 0))
         let tile3 = Tile(object: .asteroid, position: Position(x: 10, y: 0))
         let map = [tile1, tile2, tile3]
-        let result = map.countVisibleAsteroids(from: origin)
+        let result = map.visibleAsteroids(from: origin).count
         XCTAssertEqual(result, 1)
     }
 
@@ -130,7 +131,7 @@ class Day10Tests: XCTestCase {
         let tile5 = Tile(object: .asteroid, position: Position(x: 100, y: 200))
 
         let map = [tile1, tile2, tile3, tile4, tile5]
-        let result = map.countVisibleAsteroids(from: origin)
+        let result = map.visibleAsteroids(from: origin).count
         XCTAssertEqual(result, 1)
     }
 
@@ -196,7 +197,7 @@ class Day10Tests: XCTestCase {
         let tile9 = Tile(object: .empty, position: Position(x: 2, y: 2))
         let expected = [tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9]
 
-        let result = Day10().map(from: text)
+        let result = Map(from: text)
 
         XCTAssertEqual(result, expected)
     }
@@ -210,7 +211,7 @@ class Day10Tests: XCTestCase {
             ....#
             ...##
             """
-        let result = Day10().map(from: text).countMaxAsteroids()
+        let result = Map(from: text).countMaxAsteroids()
         XCTAssertEqual(result, 8)
     }
 
@@ -227,7 +228,7 @@ class Day10Tests: XCTestCase {
             ##...#..#.
             .#....####
             """
-        let result = Day10().map(from: text).countMaxAsteroids()
+        let result = Map(from: text).countMaxAsteroids()
         XCTAssertEqual(result, 33)
     }
 
@@ -244,7 +245,7 @@ class Day10Tests: XCTestCase {
             ......#...
             .####.###.
             """
-        let result = Day10().map(from: text).countMaxAsteroids()
+        let result = Map(from: text).countMaxAsteroids()
         XCTAssertEqual(result, 35)
     }
 
@@ -261,7 +262,7 @@ class Day10Tests: XCTestCase {
             .##...##.#
             .....#.#..
             """
-        let result = Day10().map(from: text).countMaxAsteroids()
+        let result = Map(from: text).countMaxAsteroids()
         XCTAssertEqual(result, 41)
     }
 
@@ -288,7 +289,7 @@ class Day10Tests: XCTestCase {
             #.#.#.#####.####.###
             ###.##.####.##.#..##
             """
-        let result = Day10().map(from: text).countMaxAsteroids()
+        let result = Map(from: text).countMaxAsteroids()
         XCTAssertEqual(result, 210)
     }
 
@@ -337,7 +338,7 @@ class Day10Tests: XCTestCase {
             Tile(object: .asteroid, position: Position(x: 7, y: 0))
         ]
 
-        let result = Day10().map(from: text).allAsteroids().visibleAsteroids(from: Position(x: 8, y: 3))
+        let result = Map(from: text).allAsteroids().visibleAsteroids(from: Position(x: 8, y: 3))
 
         XCTAssertEqual(result, expected)
     }
@@ -366,11 +367,17 @@ class Day10Tests: XCTestCase {
             ###.##.####.##.#..##
             """
         let position = Position(x: 11, y: 13)
-        let destroyed = Day10().map(from: text).destroyedAsteroids(from: position)
+        let destroyed = Map(from: text).destroyedAsteroids(from: position)
         XCTAssertEqual(destroyed[199].position, Position(x: 8, y: 2))
     }
 
     func testDay10Part2() {
         XCTAssertEqual(Day10().betAsteroidEncodedPosition(), 1008)
+    }
+
+    func testDebugDescriptionOfTileContainsObjectAndPosition() {
+        let tile = Tile(object: .asteroid, position: Position(x: 9, y: 0))
+        let description = tile.debugDescription
+        XCTAssertEqual(description, "# (9,0)")
     }
 }
