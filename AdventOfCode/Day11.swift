@@ -71,14 +71,16 @@ class PaintingRobot {
     func output(_ output: PaintingOutput) {
         switch output.color {
         case .white:
-            self.panels.removeValue(forKey: self.currentPosition)
+//            self.panels.removeValue(forKey: self.currentPosition)
+            self.panels[self.currentPosition] = .white
         case .black:
             self.panels[self.currentPosition] = .black
         case .transparent:
             break
         }
-        
+
         self.currentDirection.rotate(output.rotation)
+        self.currentPosition.advance(in: self.currentDirection)
     }
 }
 

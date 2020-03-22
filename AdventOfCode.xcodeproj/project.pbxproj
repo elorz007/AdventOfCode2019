@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8417C15C242765F2008D3121 /* GeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417C15B242765F2008D3121 /* GeometryTests.swift */; };
 		846AAA9024034CF2006E1B18 /* Day10.txt in Resources */ = {isa = PBXBuildFile; fileRef = 846AAA8F24034CF2006E1B18 /* Day10.txt */; };
 		846AAA9124034D1D006E1B18 /* Day10.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 846AAA8F24034CF2006E1B18 /* Day10.txt */; };
 		846AAA93240DB375006E1B18 /* Day11.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AAA92240DB375006E1B18 /* Day11.swift */; };
@@ -92,6 +93,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8417C15B242765F2008D3121 /* GeometryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryTests.swift; sourceTree = "<group>"; };
 		846AAA8F24034CF2006E1B18 /* Day10.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Day10.txt; sourceTree = "<group>"; };
 		846AAA92240DB375006E1B18 /* Day11.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day11.swift; sourceTree = "<group>"; };
 		846AAA95240DB385006E1B18 /* Day11Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day11Tests.swift; sourceTree = "<group>"; };
@@ -154,6 +156,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8417C15A242765D9008D3121 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				8417C15B242765F2008D3121 /* GeometryTests.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		846AAA9B240DBA0F006E1B18 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +219,7 @@
 				84E1A5B723DE42EE00116947 /* AllTests.xctestplan */,
 				84E1A5B823DE433F00116947 /* FastTests.xctestplan */,
 				84919DC3239A8DAB00877CEE /* other */,
+				8417C15A242765D9008D3121 /* Common */,
 				84A1CC9E23E5D0A70031F550 /* IntcodeComputer */,
 				84919DC1239A8DA200877CEE /* Day1Tests.swift */,
 				84AB8577239AB3730036871B /* Day2Tests.swift */,
@@ -425,6 +436,7 @@
 				846AAA94240DB375006E1B18 /* Day11.swift in Sources */,
 				84919DC2239A8DA200877CEE /* Day1Tests.swift in Sources */,
 				846E980A23E208BC00FB2797 /* Day8.swift in Sources */,
+				8417C15C242765F2008D3121 /* GeometryTests.swift in Sources */,
 				846AAAA1240DC019006E1B18 /* Color.swift in Sources */,
 				846AAA9E240DBAC4006E1B18 /* Geometry.swift in Sources */,
 				84A1CCA724033ADA0031F550 /* Day10.swift in Sources */,

@@ -26,11 +26,11 @@ struct Position: Equatable, CustomDebugStringConvertible, Hashable {
     }
 }
 
-enum Direction: Character, CustomDebugStringConvertible {
-    case up = "^"
-    case down = "v"
-    case left = "<"
-    case right = ">"
+enum Direction: Int, CaseIterable {
+    case up = 0
+    case right = 1
+    case down = 2
+    case left = 3
 
     var debugDescription: String {
         String(rawValue)
@@ -40,39 +40,29 @@ enum Direction: Character, CustomDebugStringConvertible {
 enum Rotation: Int {
     case left = 0
     case right = 1
+    var directionDelta: Int {
+        return self == .right ? 1 : -1
+    }
 }
 
 extension Direction {
     mutating func rotate(_ rotation: Rotation) {
-        switch self {
+        let directionsCount = Direction.allCases.count
+        self = Direction(rawValue: ((self.rawValue + directionsCount + rotation.directionDelta) % directionsCount))!
+    }
+}
+
+extension Position {
+    mutating func advance(in direction: Direction) {
+        switch direction {
         case .up:
-            switch rotation {
-            case .left:
-                self = .left
-            case .right:
-                self = .right
-            }
+            self = Position(x: self.x, y: self.y + 1)
         case .down:
-            switch rotation {
-            case .left:
-                self = .right
-            case .right:
-                self = .left
-            }
+            self = Position(x: self.x, y: self.y - 1)
         case .left:
-            switch rotation {
-            case .left:
-                self = .down
-            case .right:
-                self = .up
-            }
+            self = Position(x: self.x - 1, y: self.y)
         case .right:
-            switch rotation {
-            case .left:
-                self = .up
-            case .right:
-                self = .down
-            }
+            self = Position(x: self.x + 1, y: self.y)
         }
     }
 }
