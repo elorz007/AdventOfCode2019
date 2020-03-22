@@ -170,8 +170,55 @@ class Day12Tests: XCTestCase {
         XCTAssertEqual(resultMoon3.position, Position3D(x: 12, y: 23, z: 34))
     }
 
+    // MARK: - Energy
+    func testWhenKineticEnergyIsCalculatedThenVelocityIsAdded() {
+        let energy = Energy()
+        let moon = Moon(position: Position3D(x: 1, y: 2, z: 3), velocity: Velocity3D(x: 20, y: 30, z: 40))
+        let result = energy.kinetic(from: moon)
+        XCTAssertEqual(result, 90)
+    }
+
+    func testWhenKineticEnergyIsCalculatedThenAbsoluteValuesOfVelocityAreAdded() {
+        let energy = Energy()
+        let moon = Moon(position: Position3D(x: 1, y: 2, z: 3), velocity: Velocity3D(x: -10, y: 10, z: -10))
+        let result = energy.kinetic(from: moon)
+        XCTAssertEqual(result, 30)
+    }
+
+    func testWhenPotentialEnergyIsCalculatedThenPositionIsAdded() {
+        let energy = Energy()
+        let moon = Moon(position: Position3D(x: 1, y: 2, z: 3), velocity: Velocity3D(x: 20, y: 30, z: 40))
+        let result = energy.potential(from: moon)
+        XCTAssertEqual(result, 6)
+    }
+
+    func testWhenPotentialEnergyIsCalculatedThenAbsoluteValuesOfPositionAreAdded() {
+        let energy = Energy()
+        let moon = Moon(position: Position3D(x: -1, y: 1, z: -1), velocity: Velocity3D(x: -10, y: 10, z: -10))
+        let result = energy.potential(from: moon)
+        XCTAssertEqual(result, 3)
+    }
+
+    func testWhenTotalEnergyIsCalculatedThenPotentialAndKineticAreMultiplied() {
+        let energy = Energy()
+        let moon = Moon(position: Position3D(x: -1, y: 2, z: -1), velocity: Velocity3D(x: -10, y: 10, z: -10))
+        let result = energy.total(from: moon)
+        XCTAssertEqual(result, 120)
+    }
+
+    func testWhenTotalEnergyFromUniverseIsCalculatedThenAllMoonsAreTakenIntoAccount() {
+        let moon1 = Moon(position: Position3D(x: 1, y: 1, z: 1), velocity: Velocity3D(x: 1, y: 1, z: 1))
+        let moon2 = Moon(position: Position3D(x: 10, y: 10, z: 10), velocity: Velocity3D(x: 10, y: 10, z: 10))
+        let moon3 = Moon(position: Position3D(x: 0, y: 0, z: 0), velocity: Velocity3D(x: 0, y: 0, z: 0))
+        let moon4 = Moon(position: Position3D(x: 100, y: 100, z: 100), velocity: Velocity3D(x: 100, y: 100, z: 100))
+        let universe = Universe(moons: [moon1, moon2, moon3, moon4])
+        let result = universe.totalEnergy()
+        XCTAssertEqual(result, 90909)
+    }
+
     // MARK: - Examples
-    func testWhenSteppingThroughExampleThenResultsAreCalculated() {
+    // swiftlint:disable function_body_length
+    func testWhenSteppingThroughExample1ThenResultsAreCalculated() {
         let moons = [
             Moon(position: Position3D(x: -1, y: 0, z: 2)),
             Moon(position: Position3D(x: 2, y: -10, z: -7)),
@@ -239,7 +286,32 @@ class Day12Tests: XCTestCase {
         XCTAssertEqual(universe.moons[1], Moon([ 1, -8, 0, -1, 1, 3]))
         XCTAssertEqual(universe.moons[2], Moon([ 3, -6, 1, 3, 2, -3]))
         XCTAssertEqual(universe.moons[3], Moon([ 2, 0, 4, 1, -1, -1]))
+
+        XCTAssertEqual(universe.totalEnergy(), 179)
     }
+    // swiftlint:enable function_body_length
+
+    func testWhenSteppingThroughExample2ThenResultsAreCalculated() {
+        let moons = [
+            Moon(position: Position3D(x: -8, y: -10, z: 0)),
+            Moon(position: Position3D(x: 5, y: 5, z: 10)),
+            Moon(position: Position3D(x: 2, y: -7, z: 3)),
+            Moon(position: Position3D(x: 9, y: -8, z: -3))
+        ]
+        let universe = Universe(moons: moons)
+
+        for _ in 1...100 {
+            universe.step()
+        }
+
+        XCTAssertEqual(universe.moons[0], Moon([  8, -12, -9, -7, 3, 0]))
+        XCTAssertEqual(universe.moons[1], Moon([ 13, 16, -3, 3, -11, -5]))
+        XCTAssertEqual(universe.moons[2], Moon([-29, -11, -1, -3, 7, 4]))
+        XCTAssertEqual(universe.moons[3], Moon([ 16, -13, 23, 7, 1, 1]))
+
+        XCTAssertEqual(universe.totalEnergy(), 1940)
+    }
+
 }
 
 extension Moon {

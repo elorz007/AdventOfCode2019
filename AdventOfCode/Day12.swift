@@ -33,6 +33,11 @@ class Universe {
         applyGravity()
         applyVelocity()
     }
+
+    func totalEnergy() -> Int {
+        let energy = Energy()
+        return moons.map { energy.total(from: $0) }.reduce(0, +)
+    }
 }
 
 class Gravity {
@@ -59,6 +64,24 @@ class Velocity {
         moon.position.y += moon.velocity.y
         moon.position.z += moon.velocity.z
         return moon
+    }
+}
+
+class Energy {
+    func kinetic(from moon: Moon) -> Int {
+        absoluteAdd([moon.velocity.x, moon.velocity.y, moon.velocity.z])
+    }
+
+    func potential(from moon: Moon) -> Int {
+        absoluteAdd([moon.position.x, moon.position.y, moon.position.z])
+    }
+
+    func absoluteAdd(_ array: [Int]) -> Int {
+        array.map(abs).reduce(0, +)
+    }
+
+    func total(from moon: Moon) -> Int {
+        return kinetic(from: moon) * potential(from: moon)
     }
 }
 
