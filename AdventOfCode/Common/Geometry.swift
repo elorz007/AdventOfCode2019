@@ -66,3 +66,15 @@ extension Position {
         }
     }
 }
+
+struct Velocity3D {
+    var x: Int
+    var y: Int
+    var z: Int
+}
+
+struct Position3D {
+    var x: Int
+    var y: Int
+    var  z: Int
+}
