@@ -10,7 +10,7 @@ import Cocoa
 
 struct Moon: Equatable {
     var position: Position3D
-    var velocity: Velocity3D
+    var velocity = Velocity3D(x: 0, y: 0, z: 0)
 }
 
 class Universe {
@@ -18,31 +18,20 @@ class Universe {
     init(moons: [Moon]) {
         self.moons = moons
     }
+
     func applyGravity() {
         let gravity = Gravity()
-        iterate(moons: &moons, at: 0) { gravity.apply(&$0, &$1) }
+        PairsIterator().iterate(&moons) { gravity.apply(&$0, &$1) }
     }
 
-    func iterate(moons: inout [Moon], at index: Int, do action: (inout Moon, inout Moon) -> Void) {
-        guard moons.count >= 2 else { return }
-        if moons.count - index == 2 {
-            let lastIndex = moons.count - 1
-            let previousToLastIndex = moons.count - 2
-            var moon1 = moons[lastIndex]
-            var moon2 = moons[previousToLastIndex]
-            action(&moon1, &moon2)
-            moons[lastIndex] = moon1
-            moons[previousToLastIndex] = moon2
-        } else {
-            var current = moons[index]
-            for otherIndex in index + 1..<moons.count {
-                var other = moons[otherIndex]
-                action(&current, &other)
-                moons[otherIndex] = other
-            }
-            moons[index] = current
-            iterate(moons: &moons, at: index + 1, do: action)
-        }
+    func applyVelocity() {
+        let velocity = Velocity()
+        moons = moons.map { velocity.apply($0) }
+    }
+
+    func step() {
+        applyGravity()
+        applyVelocity()
     }
 }
 
@@ -59,15 +48,45 @@ class Gravity {
         moon2.velocity.z -= velocityDifferenceZ
     }
     func velocityDifference(_ dimensionValue1: Int, _ dimensionValue2: Int) -> Int {
-        min(max(dimensionValue1 - dimensionValue2, -1), 1)
+        -min(max(dimensionValue1 - dimensionValue2, -1), 1)
     }
 }
 
 class Velocity {
-    func apply(_ moon: inout Moon) {
+    func apply(_ inMoon: Moon) -> Moon {
+        var moon = inMoon
         moon.position.x += moon.velocity.x
         moon.position.y += moon.velocity.y
         moon.position.z += moon.velocity.z
+        return moon
+    }
+}
+
+class PairsIterator<T> {
+    func iterate(_ objects: inout [T], do action: (inout T, inout T) -> Void) {
+        iterate(&objects, at: 0, do: action)
+    }
+
+    func iterate(_ objects: inout [T], at index: Int, do action: (inout T, inout T) -> Void) {
+        guard objects.count >= 2 else { return }
+        if objects.count - index == 2 {
+            let lastIndex = objects.count - 1
+            let previousToLastIndex = objects.count - 2
+            var object1 = objects[lastIndex]
+            var object2 = objects[previousToLastIndex]
+            action(&object1, &object2)
+            objects[lastIndex] = object1
+            objects[previousToLastIndex] = object2
+        } else {
+            var current = objects[index]
+            for otherIndex in index + 1..<objects.count {
+                var other = objects[otherIndex]
+                action(&current, &other)
+                objects[otherIndex] = other
+            }
+            objects[index] = current
+            iterate(&objects, at: index + 1, do: action)
+        }
     }
 }
 
