@@ -15,17 +15,8 @@ class Day5: NSObject {
         // swiftlint:enable force_try
     }
 
-    func inputProgram() -> Program {
-        return input().split(separator: ",").map {
-            let s = String($0)
-            let i = Int(s)!
-            return i
-        }
-    }
-
     func finalOutput() -> Int {
-        let computer = IntcodeComputer()
-        computer.program = inputProgram()
+        let computer = IntcodeComputer(program: input())
         computer.input = { 1 }
         var finalOutput = 0
         computer.output = { finalOutput = $0 }
@@ -34,8 +25,7 @@ class Day5: NSObject {
     }
 
     func diagnosticCodeThermalRadiator() -> Int {
-        let computer = IntcodeComputer()
-        computer.program = inputProgram()
+        let computer = IntcodeComputer(program: input())
         computer.input = { 5 }
         var output = 0
         computer.output = { output = $0 }

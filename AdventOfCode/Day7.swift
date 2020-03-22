@@ -222,12 +222,8 @@ class Day7: NSObject {
     }
 
     lazy var inputCache = input()
-    func read(input: String) -> Program {
-        return input.split(separator: ",").map { Int(String($0))! }
-    }
+
     func createComputer() -> IntcodeComputer {
-        let computer = IntcodeComputer()
-        computer.program = read(input: inputCache)
-        return computer
+        return IntcodeComputer(program: inputCache)
     }
 }

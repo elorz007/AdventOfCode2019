@@ -94,4 +94,11 @@ class Day11: NSObject {
         try! String(contentsOfFile: "./Day11.txt").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         // swiftlint:enable force_try
     }
+
+    func coveredArea() -> Int {
+        let computer = IntcodeComputer(program: input())
+        let robot = PaintingRobot(computer: computer)
+        robot.run()
+        return robot.coveredArea
+    }
 }

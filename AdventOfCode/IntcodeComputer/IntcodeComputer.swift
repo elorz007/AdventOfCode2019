@@ -161,3 +161,10 @@ private struct BinaryInstructionDescription {
     let address2: Address
     let result: Address
 }
+
+extension IntcodeComputer {
+    convenience init(program: String) {
+        self.init()
+        self.program = program.split(separator: ",").map { Int(String($0))! }
+    }
+}

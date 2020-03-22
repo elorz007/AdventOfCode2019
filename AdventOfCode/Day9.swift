@@ -11,8 +11,7 @@ import Cocoa
 class Day9: NSObject {
 
     func runBoostComputer(withInput value: Int) -> Int {
-        let computer = IntcodeComputer()
-        computer.program = read(input: input())
+        let computer = IntcodeComputer(program: input())
         computer.input = {
             return value
         }
@@ -34,8 +33,5 @@ class Day9: NSObject {
         // swiftlint:disable force_try
         try! String(contentsOfFile: "./Day9.txt").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         // swiftlint:enable force_try
-    }
-    func read(input: String) -> Program {
-        return input.split(separator: ",").map { Int(String($0))! }
     }
 }

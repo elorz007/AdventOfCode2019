@@ -113,4 +113,8 @@ class Day11Tests: XCTestCase {
         [1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0].forEach { computerMock.output!($0) }
         XCTAssertEqual(robot.coveredArea, 6)
     }
+
+    func testWhenRobotIsGivenFullProgramThenCoveredAreadIs2594() {
+        XCTAssertEqual(Day11().coveredArea(), 2594)
+    }
 }
