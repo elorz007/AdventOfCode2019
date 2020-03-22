@@ -13,11 +13,6 @@ class IntcodeComputerMock: IntcodeComputer {
     }
 }
 
-//class PaintingRobotMock : PaintingRobot {
-//    override func run() {
-//    }
-//}
-
 class Day11Tests: XCTestCase {
 
     func testWhenColorIsBlackThenBinaryIs0() {
@@ -79,14 +74,43 @@ class Day11Tests: XCTestCase {
         XCTAssertEqual(writtenColor, .white)
     }
 
-    func testWhenRobotIsFacingUpAndTurnedLeftThenItMovesLeft() {
+    func testWhenRobotIsGivenARotationThenItFacesANewDirection() {
         let computerMock = IntcodeComputerMock()
         let robot = PaintingRobot(computer: computerMock)
         robot.run()
         robot.currentPosition = Position(x: 0, y: 0)
+        robot.currentDirection = .left
         computerMock.output!(0)
+        computerMock.output!(1)
+        XCTAssertEqual(robot.currentDirection, .up)
+    }
+
+    func testWhenRobotIsGivenARotationThenItMoves() {
+        let computerMock = IntcodeComputerMock()
+        let robot = PaintingRobot(computer: computerMock)
+        robot.run()
+        robot.currentPosition = Position(x: 0, y: 0)
+        robot.currentDirection = .left
         computerMock.output!(0)
-        let newPosition = robot.currentPosition
-        XCTAssertEqual(newPosition, Position(x: -1, y: 0))
+        computerMock.output!(1)
+        XCTAssertEqual(robot.currentPosition, Position(x: 0, y: 1))
+    }
+
+    func testWhenRobotStartsThenItsFacingUp() {
+        let robot = PaintingRobot(computer: IntcodeComputerMock())
+        XCTAssertEqual(robot.currentDirection, .up)
+    }
+
+    func testWhenRobotStartsThenPositionIs00() {
+        let robot = PaintingRobot(computer: IntcodeComputerMock())
+        XCTAssertEqual(robot.currentPosition, Position(x: 0, y: 0))
+    }
+
+    func testWhenRobotIsGivenExampleOrdersThenItPaints6Panels() {
+        let computerMock = IntcodeComputerMock()
+        let robot = PaintingRobot(computer: computerMock)
+        robot.run()
+        [1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0].forEach { computerMock.output!($0) }
+        XCTAssertEqual(robot.coveredArea, 6)
     }
 }

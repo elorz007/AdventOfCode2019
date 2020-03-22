@@ -44,6 +44,10 @@ class PaintingRobot {
         self.computer.run()
     }
 
+    var coveredArea: Int {
+        panels.count
+    }
+
     func rawInput() -> Int {
         self.input().rawValue
     }
