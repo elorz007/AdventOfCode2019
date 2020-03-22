@@ -52,3 +52,4 @@ print("Advent Of Code starting!")
 
 let d11 = Day11()
 print("[Day11] Covered area: " + String(d11.coveredArea()))
+d11.paintRegistrationIdentifier()

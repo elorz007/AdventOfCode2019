@@ -28,8 +28,9 @@ struct PaintingOutput {
 }
 
 class PaintingRobot {
-    init(computer: IntcodeComputer) {
+    init(computer: IntcodeComputer, initialColor: Color = .black) {
         self.computer = computer
+        self.panels[self.currentPosition] = initialColor
     }
 
     let computer: IntcodeComputer
@@ -38,7 +39,6 @@ class PaintingRobot {
     var panels = Panels()
 
     func run() {
-        panels[currentPosition] = .black
         self.computer.input = rawInput
         self.computer.output = rawOutput
         self.computer.run()
@@ -75,7 +75,6 @@ class PaintingRobot {
     func output(_ output: PaintingOutput) {
         switch output.color {
         case .white:
-//            self.panels.removeValue(forKey: self.currentPosition)
             self.panels[self.currentPosition] = .white
         case .black:
             self.panels[self.currentPosition] = .black
@@ -85,6 +84,31 @@ class PaintingRobot {
 
         self.currentDirection.rotate(output.rotation)
         self.currentPosition.advance(in: self.currentDirection)
+    }
+}
+
+extension Panels {
+    var description: String {
+        let panels = self
+        let allX = panels.keys.map { $0.x }
+        guard let minX = allX.min(), let maxX = allX.max() else {
+            return ""
+        }
+        let allY = panels.keys.map { $0.y }
+        guard let minY = allY.min(), let maxY = allY.max() else {
+            return ""
+        }
+
+        var result = ""
+        for y in (minY...maxY).reversed() {
+            for x in minX...maxX {
+                let position = Position(x: x, y: y)
+                let color = panels[position] ?? .black
+                result += color.description
+                result += x == maxX ? "\n" : ""
+            }
+        }
+        return result
     }
 }
 
@@ -100,5 +124,17 @@ class Day11: NSObject {
         let robot = PaintingRobot(computer: computer)
         robot.run()
         return robot.coveredArea
+    }
+
+    func paintRegistrationIdentifier() {
+        print(registrationIdentifierPanels().description)
+    }
+
+    func registrationIdentifierPanels() -> Panels {
+        let computer = IntcodeComputer(program: input())
+        let robot = PaintingRobot(computer: computer)
+        robot.panels[robot.currentPosition] = .white
+        robot.run()
+        return robot.panels
     }
 }

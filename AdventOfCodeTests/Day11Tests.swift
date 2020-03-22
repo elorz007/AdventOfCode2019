@@ -117,4 +117,17 @@ class Day11Tests: XCTestCase {
     func testWhenRobotIsGivenFullProgramThenCoveredAreadIs2594() {
         XCTAssertEqual(Day11().coveredArea(), 2594)
     }
+
+    func testWhenRobotIsGivenFullProgramThenRegistrationIdentifierIsAKERJFHK() {
+        let expected = """
+        ⬛⬛⬜⬜⬛⬛⬜⬛⬛⬜⬛⬜⬜⬜⬜⬛⬜⬜⬜⬛⬛⬛⬛⬜⬜⬛⬜⬜⬜⬜⬛⬜⬛⬛⬜⬛⬜⬛⬛⬜⬛⬛⬛
+        ⬛⬜⬛⬛⬜⬛⬜⬛⬜⬛⬛⬜⬛⬛⬛⬛⬜⬛⬛⬜⬛⬛⬛⬛⬜⬛⬜⬛⬛⬛⬛⬜⬛⬛⬜⬛⬜⬛⬜⬛⬛⬛⬛
+        ⬛⬜⬛⬛⬜⬛⬜⬜⬛⬛⬛⬜⬜⬜⬛⬛⬜⬛⬛⬜⬛⬛⬛⬛⬜⬛⬜⬜⬜⬛⬛⬜⬜⬜⬜⬛⬜⬜⬛⬛⬛⬛⬛
+        ⬛⬜⬜⬜⬜⬛⬜⬛⬜⬛⬛⬜⬛⬛⬛⬛⬜⬜⬜⬛⬛⬛⬛⬛⬜⬛⬜⬛⬛⬛⬛⬜⬛⬛⬜⬛⬜⬛⬜⬛⬛⬛⬛
+        ⬛⬜⬛⬛⬜⬛⬜⬛⬜⬛⬛⬜⬛⬛⬛⬛⬜⬛⬜⬛⬛⬜⬛⬛⬜⬛⬜⬛⬛⬛⬛⬜⬛⬛⬜⬛⬜⬛⬜⬛⬛⬛⬛
+        ⬛⬜⬛⬛⬜⬛⬜⬛⬛⬜⬛⬜⬜⬜⬜⬛⬜⬛⬛⬜⬛⬛⬜⬜⬛⬛⬜⬛⬛⬛⬛⬜⬛⬛⬜⬛⬜⬛⬛⬜⬛⬛⬛
+
+        """
+        XCTAssertEqual(Day11().registrationIdentifierPanels().description, expected)
+    }
 }
