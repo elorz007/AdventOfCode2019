@@ -67,13 +67,13 @@ extension Position {
     }
 }
 
-struct Velocity3D {
+struct Velocity3D: Equatable {
     var x: Int
     var y: Int
     var z: Int
 }
 
-struct Position3D {
+struct Position3D: Equatable {
     var x: Int
     var y: Int
     var  z: Int
