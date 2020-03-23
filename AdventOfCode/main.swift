@@ -50,6 +50,9 @@ print("Advent Of Code starting!")
 //print("[Day10] Max asteroids: " + String(d10.maxAsteroids()))
 //print("[Day10] Bet asteroid encoded position: " + String(d10.betAsteroidEncodedPosition()))
 
-let d11 = Day11()
-print("[Day11] Covered area: " + String(d11.coveredArea()))
-d11.paintRegistrationIdentifier()
+//let d11 = Day11()
+//print("[Day11] Covered area: " + String(d11.coveredArea()))
+//d11.paintRegistrationIdentifier()
+
+let d12 = Day12()
+print("[Day12] Total energy: " + String(d12.totalEnergy()))

@@ -312,6 +312,11 @@ class Day12Tests: XCTestCase {
         XCTAssertEqual(universe.totalEnergy(), 1940)
     }
 
+    func testDay12TotalEnergy() {
+        let d12 = Day12()
+        XCTAssertEqual(d12.totalEnergy(), 14809)
+    }
+
 }
 
 extension Moon {

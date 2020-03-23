@@ -114,5 +114,17 @@ class PairsIterator<T> {
 }
 
 class Day12: NSObject {
-
+    func totalEnergy() -> Int {
+        let moons = [
+            Moon(position: Position3D(x: 0, y: 6, z: 1)),
+            Moon(position: Position3D(x: 4, y: 4, z: 19)),
+            Moon(position: Position3D(x: -11, y: 1, z: 8)),
+            Moon(position: Position3D(x: 2, y: 19, z: 15))
+        ]
+        let universe = Universe(moons: moons)
+        for _ in 1...1000 {
+            universe.step()
+        }
+        return universe.totalEnergy()
+    }
 }
