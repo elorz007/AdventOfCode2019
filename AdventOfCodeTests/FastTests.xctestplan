@@ -15,6 +15,7 @@
     {
       "parallelizable" : true,
       "skippedTests" : [
+        "Day12Tests\/test_SLOW_Day12StepsUntilCycle()",
         "Day2Tests\/testNounAndVerbCanBeSearched()",
         "Day2Tests\/test_SLOW_NounAndVerbCanBeSearched()",
         "Day3Tests\/test_SLOW_StepsOfFastestIntersection()",

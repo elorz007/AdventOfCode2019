@@ -67,14 +67,59 @@ extension Position {
     }
 }
 
-struct Velocity3D: Equatable {
+enum Axis3D {
+    case x, y, z
+}
+
+struct Velocity3D: Hashable, Restrictable3D {
     var x: Int
     var y: Int
     var z: Int
 }
 
-struct Position3D: Equatable {
+struct Position3D: Hashable, Restrictable3D {
     var x: Int
     var y: Int
-    var  z: Int
+    var z: Int
+}
+
+protocol ThreeDimensions {
+    var x: Int { get set }
+    var y: Int { get set }
+    var z: Int { get set }
+}
+
+protocol Restrictable3D: ThreeDimensions {
+    mutating func restrictTo(axis: Axis3D)
+}
+
+extension ThreeDimensions {
+    mutating func restrictTo(axis: Axis3D) {
+        let x = self.x
+        let y = self.y
+        let z = self.z
+        self.x = 0
+        self.y = 0
+        self.z = 0
+        switch axis {
+        case .x:
+            self.x = x
+        case .y:
+            self.y = y
+        case .z:
+            self.z = z
+        }
+    }
+}
+
+// Probably there is a way to not repeat this extension twice
+extension Velocity3D: CustomDebugStringConvertible {
+    var debugDescription: String {
+        "\(x),\(y),\(z)"
+    }
+}
+extension Position3D: CustomDebugStringConvertible {
+    var debugDescription: String {
+        "\(x),\(y),\(z)"
+    }
 }

@@ -132,6 +132,7 @@ class Day12Tests: XCTestCase {
 
         let universe = Universe(moons: [moon1, moon2, moon3, moon4])
         universe.applyGravity()
+
         let resultMoon1 = universe.moons[0]
         let resultMoon2 = universe.moons[1]
         let resultMoon3 = universe.moons[2]
@@ -315,6 +316,68 @@ class Day12Tests: XCTestCase {
     func testDay12TotalEnergy() {
         let d12 = Day12()
         XCTAssertEqual(d12.totalEnergy(), 14809)
+    }
+
+    // MARK: - Repeated Universe
+    func testWhenAStepIsTakenThenNumberIncreases() {
+        let moons = [
+            Moon(position: Position3D(x: 0, y: 0, z: 0)),
+            Moon(position: Position3D(x: 1, y: 0, z: 0))
+        ]
+        let universe = Universe(moons: moons)
+        universe.step()
+        universe.step()
+        universe.step()
+        universe.step()
+        universe.step()
+        XCTAssertEqual(universe.steps, 5)
+    }
+
+    func testWhenSimpleUniverseIsRepeatingThenItReturnsFalseInLessThan20Steps() {
+        let moons = [
+            Moon(position: Position3D(x: 0, y: 0, z: 0)),
+            Moon(position: Position3D(x: 1, y: 0, z: 0))
+        ]
+        let universe = Universe(moons: moons)
+        while universe.step(), universe.steps < 20 {}
+        XCTAssertLessThan(universe.steps, 20)
+    }
+
+    func testWhenSimpleUniverseIsRepeatingThenItFinishesIn4Steps() {
+        let moons = [
+            Moon(position: Position3D(x: 0, y: 0, z: 0)),
+            Moon(position: Position3D(x: 1, y: 0, z: 0))
+        ]
+        let universe = Universe(moons: moons)
+        while universe.step() {}
+        XCTAssertEqual(universe.steps, 4)
+    }
+
+    func testWhenSteppingThroughExample1ThenItRepeatsAfter2772Steps() {
+        let moons = [
+            Moon(position: Position3D(x: -1, y: 0, z: 2)),
+            Moon(position: Position3D(x: 2, y: -10, z: -7)),
+            Moon(position: Position3D(x: 4, y: -8, z: 8)),
+            Moon(position: Position3D(x: 3, y: 5, z: -1))
+        ]
+        let steps = EfficientCycleFinder().stepsUntilCycle(moons: moons)
+        XCTAssertEqual(steps, 2772)
+    }
+
+    func testWhenSteppingThroughExample2ThenItRepeatsAfter4686774924Steps() {
+        let moons = [
+            Moon(position: Position3D(x: -8, y: -10, z: 0)),
+            Moon(position: Position3D(x: 5, y: 5, z: 10)),
+            Moon(position: Position3D(x: 2, y: -7, z: 3)),
+            Moon(position: Position3D(x: 9, y: -8, z: -3))
+        ]
+        let steps = EfficientCycleFinder().stepsUntilCycle(moons: moons)
+        XCTAssertEqual(steps, 4686774924)
+    }
+
+    func test_SLOW_Day12StepsUntilCycle() {
+        let d12 = Day12()
+        XCTAssertEqual(d12.stepsUntilCycle(), 282270365571288)
     }
 
 }

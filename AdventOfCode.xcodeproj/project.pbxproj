@@ -72,6 +72,8 @@
 		84C61E7223CFC3A2008966A1 /* Day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C61E6E23CFBB7E008966A1 /* Day7.swift */; };
 		84C61E7423D10AB4008966A1 /* Day7.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84C61E7323D10AB4008966A1 /* Day7.txt */; };
 		84C61E7523D10ABE008966A1 /* Day7.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84C61E7323D10AB4008966A1 /* Day7.txt */; };
+		84F117E42439145400E2C67D /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F117E32439145400E2C67D /* Math.swift */; };
+		84F117E52439162C00E2C67D /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F117E32439145400E2C67D /* Math.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -141,6 +143,7 @@
 		84C61E7323D10AB4008966A1 /* Day7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Day7.txt; sourceTree = "<group>"; };
 		84E1A5B723DE42EE00116947 /* AllTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AllTests.xctestplan; sourceTree = "<group>"; };
 		84E1A5B823DE433F00116947 /* FastTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = FastTests.xctestplan; sourceTree = "<group>"; };
+		84F117E32439145400E2C67D /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +177,7 @@
 			children = (
 				846AAA9C240DBAC4006E1B18 /* Geometry.swift */,
 				846AAA9F240DC019006E1B18 /* Color.swift */,
+				84F117E32439145400E2C67D /* Math.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -414,6 +418,7 @@
 				84AB8576239AACE40036871B /* Day2.swift in Sources */,
 				846AAA93240DB375006E1B18 /* Day11.swift in Sources */,
 				84AB857B239BF1380036871B /* Day3.swift in Sources */,
+				84F117E42439145400E2C67D /* Math.swift in Sources */,
 				84AB8589239D64AD0036871B /* Day5.swift in Sources */,
 				84A1CC8923E583B10031F550 /* Day9.swift in Sources */,
 				84AB8591239EEAE00036871B /* Day6.swift in Sources */,
@@ -428,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84919DC0239A8D9000877CEE /* Day1.swift in Sources */,
+				84F117E52439162C00E2C67D /* Math.swift in Sources */,
 				84A1CCA624033A9C0031F550 /* Day10Tests.swift in Sources */,
 				84AB857C239BF1380036871B /* Day3.swift in Sources */,
 				84A1CC9423E584630031F550 /* IntcodeComputer.swift in Sources */,

@@ -56,3 +56,4 @@ print("Advent Of Code starting!")
 
 let d12 = Day12()
 print("[Day12] Total energy: " + String(d12.totalEnergy()))
+print("[Day12] Steps until full repeat: " + String(d12.stepsUntilCycle()))

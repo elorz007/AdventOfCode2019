@@ -8,35 +8,85 @@
 
 import Cocoa
 
-struct Moon: Equatable {
+struct Moon: Hashable {
     var position: Position3D
     var velocity = Velocity3D(x: 0, y: 0, z: 0)
+
+    func restrictTo(axis: Axis3D) -> Moon {
+        var newMoon = self
+        newMoon.position.restrictTo(axis: axis)
+        newMoon.velocity.restrictTo(axis: axis)
+        return newMoon
+    }
+}
+
+extension Moon: CustomDebugStringConvertible {
+    var debugDescription: String {
+        return "\(position) \(velocity)"
+    }
 }
 
 class Universe {
     var moons: [Moon]
+    var previousStates: Set<Int> = []
+    var steps: Int = 0
+    let gravity = Gravity()
+    let velocity = Velocity()
     init(moons: [Moon]) {
         self.moons = moons
+        insertCurrentState()
     }
 
     func applyGravity() {
-        let gravity = Gravity()
         PairsIterator().iterate(&moons) { gravity.apply(&$0, &$1) }
     }
 
     func applyVelocity() {
-        let velocity = Velocity()
         moons = moons.map { velocity.apply($0) }
     }
 
-    func step() {
+    @discardableResult func step() -> Bool {
         applyGravity()
         applyVelocity()
+        steps += 1
+        return insertCurrentState()
+    }
+
+    @discardableResult func insertCurrentState() -> Bool {
+        self.previousStates.insert(self.currentState()).inserted
+    }
+
+    func currentState() -> Int {
+        moons.hashValue
     }
 
     func totalEnergy() -> Int {
         let energy = Energy()
         return moons.map { energy.total(from: $0) }.reduce(0, +)
+    }
+}
+
+class RestrictedUniverse: Universe {
+    init(moons: [Moon], restrictTo axis: Axis3D) {
+        let restrictedMoons = moons.map { $0.restrictTo(axis: axis) }
+        super.init(moons: restrictedMoons)
+    }
+}
+
+class EfficientCycleFinder {
+    func stepsUntilCycle(moons: [Moon]) -> Int {
+        let universeX = RestrictedUniverse(moons: moons, restrictTo: .x)
+        let stepsX = stepsUntilCycle(universe: universeX)
+        let universeY = RestrictedUniverse(moons: moons, restrictTo: .y)
+        let stepsY = stepsUntilCycle(universe: universeY)
+        let universeZ = RestrictedUniverse(moons: moons, restrictTo: .z)
+        let stepsZ = stepsUntilCycle(universe: universeZ)
+        return leastCommonMultiple(stepsX, stepsY, stepsZ)
+    }
+
+    func stepsUntilCycle(universe: Universe) -> Int {
+        while universe.step() {}
+        return universe.steps
     }
 }
 
@@ -90,6 +140,7 @@ class PairsIterator<T> {
         iterate(&objects, at: 0, do: action)
     }
 
+    // This is horrible, probably easier with 2 for loops
     func iterate(_ objects: inout [T], at index: Int, do action: (inout T, inout T) -> Void) {
         guard objects.count >= 2 else { return }
         if objects.count - index == 2 {
@@ -114,17 +165,23 @@ class PairsIterator<T> {
 }
 
 class Day12: NSObject {
-    func totalEnergy() -> Int {
-        let moons = [
+    func inputMoons() -> [Moon] {
+        return [
             Moon(position: Position3D(x: 0, y: 6, z: 1)),
             Moon(position: Position3D(x: 4, y: 4, z: 19)),
             Moon(position: Position3D(x: -11, y: 1, z: 8)),
             Moon(position: Position3D(x: 2, y: 19, z: 15))
         ]
-        let universe = Universe(moons: moons)
+    }
+    func totalEnergy() -> Int {
+        let universe = Universe(moons: inputMoons())
         for _ in 1...1000 {
             universe.step()
         }
         return universe.totalEnergy()
+    }
+
+    func stepsUntilCycle() -> Int {
+        return EfficientCycleFinder().stepsUntilCycle(moons: inputMoons())
     }
 }
