@@ -61,3 +61,4 @@ print("Advent Of Code starting!")
 
 let d13 = Day13()
 print("[Day13] Block tiles: " + String(d13.numberOfBlockTiles()))
+// Final score: 16309

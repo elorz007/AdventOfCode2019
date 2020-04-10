@@ -8,20 +8,25 @@
 
 import Cocoa
 
-struct Position: Equatable, CustomDebugStringConvertible, Hashable {
-    let x: Int
-    let y: Int
+public struct Position: Equatable, CustomDebugStringConvertible, Hashable {
+    public let x: Int
+    public let y: Int
 
-    static func == (lhs: Position, rhs: Position) -> Bool {
+    public init(x: Int, y: Int) {
+        self.x = x
+        self.y = y
+    }
+
+    public static func == (lhs: Position, rhs: Position) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
     }
 
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(x)
         hasher.combine(y)
     }
 
-    var debugDescription: String {
+    public var debugDescription: String {
         "(\(x),\(y))"
     }
 }

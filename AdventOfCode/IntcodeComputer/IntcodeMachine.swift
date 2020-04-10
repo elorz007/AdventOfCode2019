@@ -14,7 +14,7 @@ public protocol RawParsable {
 }
 
 public class IntcodeMachine<Result> where Result: RawParsable {
-    fileprivate let computer: IntcodeComputer
+    internal let computer: IntcodeComputer
 
     init(computer: IntcodeComputer) {
         self.computer = computer
