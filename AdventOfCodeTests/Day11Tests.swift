@@ -8,11 +8,6 @@
 
 import XCTest
 
-class IntcodeComputerMock: IntcodeComputer {
-    override func run() {
-    }
-}
-
 class Day11Tests: XCTestCase {
 
     func testWhenColorIsBlackThenBinaryIs0() {

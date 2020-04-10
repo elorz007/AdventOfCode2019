@@ -12,7 +12,8 @@ typealias PanelColor = Color
 
 typealias Panels = [Position: PanelColor]
 
-struct PaintingOutput {
+struct PaintingOutput: RawParsable {
+    static var size: Int { 2 }
     let color: PanelColor
     let rotation: Rotation
     init?(raw: [Int]) {
@@ -27,32 +28,21 @@ struct PaintingOutput {
     }
 }
 
-class PaintingRobot {
-    init(computer: IntcodeComputer, initialColor: Color = .black) {
-        self.computer = computer
-        self.panels[self.currentPosition] = initialColor
-    }
-
-    let computer: IntcodeComputer
+class PaintingRobot: IntcodeMachine<PaintingOutput> {
     var currentPosition = Position(x: 0, y: 0)
     var currentDirection = Direction.up
     var panels = Panels()
 
-    func run() {
-        self.computer.input = rawInput
-        self.computer.output = rawOutput
-        self.computer.run()
+    init(computer: IntcodeComputer, initialColor: Color = .black) {
+        super.init(computer: computer)
+        self.panels[self.currentPosition] = initialColor
     }
 
-    var coveredArea: Int {
-        panels.count
+    override func input() -> Int {
+        self.inputColor().rawValue
     }
 
-    func rawInput() -> Int {
-        self.input().rawValue
-    }
-
-    func input() -> PanelColor {
+    func inputColor() -> PanelColor {
         if let currentColor = self.panels[self.currentPosition] {
             return currentColor
         } else {
@@ -60,19 +50,7 @@ class PaintingRobot {
         }
     }
 
-    var gatheredOutput = [Int]()
-    let gatheredOutputSize = 2
-    func rawOutput(_ out: Int) {
-        self.gatheredOutput.append(out)
-        if self.gatheredOutput.count == self.gatheredOutputSize {
-            if let paintingOutput = PaintingOutput(raw: self.gatheredOutput) {
-                self.output(paintingOutput)
-            }
-            self.gatheredOutput.removeAll()
-        }
-    }
-
-    func output(_ output: PaintingOutput) {
+    override func output(_ output: PaintingOutput) {
         switch output.color {
         case .white:
             self.panels[self.currentPosition] = .white
@@ -84,6 +62,10 @@ class PaintingRobot {
 
         self.currentDirection.rotate(output.rotation)
         self.currentPosition.advance(in: self.currentDirection)
+    }
+
+    var coveredArea: Int {
+        panels.count
     }
 }
 
