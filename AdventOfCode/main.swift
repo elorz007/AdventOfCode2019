@@ -54,6 +54,9 @@ print("Advent Of Code starting!")
 //print("[Day11] Covered area: " + String(d11.coveredArea()))
 //d11.paintRegistrationIdentifier()
 
-let d12 = Day12()
-print("[Day12] Total energy: " + String(d12.totalEnergy()))
-print("[Day12] Steps until full repeat: " + String(d12.stepsUntilCycle()))
+//let d12 = Day12()
+//print("[Day12] Total energy: " + String(d12.totalEnergy()))
+//print("[Day12] Steps until full repeat: " + String(d12.stepsUntilCycle()))
+
+let d13 = Day13()
+print("[Day13] Block tiles: " + String(d13.numberOfBlockTiles()))

@@ -49,6 +49,12 @@ class ArcadeCabinet: IntcodeMachine<ArcadeTile> {
 
 class Day13: NSObject {
 
+    func numberOfBlockTiles() -> Int {
+        let cabinet = ArcadeCabinet(computer: IntcodeComputer(program: input()))
+        cabinet.run()
+        return cabinet.tiles.filter { $0.type == .Block }.count
+    }
+
     func input() -> String {
         // swiftlint:disable force_try
         try! String(contentsOfFile: "./Day13.txt").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)

@@ -35,4 +35,9 @@ class Day13Tests: XCTestCase {
         cabinet.run()
         return cabinet
     }
+
+    func testDay13NumberOfBlockTilesIs318() {
+        let d13 = Day13()
+        XCTAssertEqual(d13.numberOfBlockTiles(), 318)
+    }
 }
