@@ -61,7 +61,7 @@ class Day1Tests: XCTestCase {
         let d = Day1()
         let input = d.input()
         XCTAssertTrue(input.hasPrefix("139936"))
-        XCTAssertTrue(input.hasSuffix("110806\n"))
+        XCTAssertTrue(input.hasSuffix("110806"))
     }
 
     func testInputHas100Masses() {

@@ -16,8 +16,8 @@ enum ArcadeTileType: Int {
     case Ball = 4
 }
 
-struct ArcadeTile: RawParsable, Equatable {
-    static var size: Int { 3 }
+public struct ArcadeTile: RawParsable, Equatable {
+    public static var size: Int { 3 }
 
     let type: ArcadeTileType
     let position: Position
@@ -27,7 +27,7 @@ struct ArcadeTile: RawParsable, Equatable {
         self.position = position
     }
 
-    init?(raw: [Int]) {
+    public init?(raw: [Int]) {
         guard raw.count == 3 else {
             return nil
         }
@@ -39,25 +39,23 @@ struct ArcadeTile: RawParsable, Equatable {
     }
 }
 
-class ArcadeCabinet: IntcodeMachine<ArcadeTile> {
+public class ArcadeCabinet: IntcodeMachine<ArcadeTile> {
     var tiles = [ArcadeTile]()
 
-    override func output(_ output: ArcadeTile) {
+    override public func output(_ output: ArcadeTile) {
         self.tiles.append(output)
     }
 }
 
-class Day13: NSObject {
+public class Day13: Day {
 
-    func numberOfBlockTiles() -> Int {
-        let cabinet = ArcadeCabinet(computer: IntcodeComputer(program: input()))
+    public func numberOfBlockTiles() -> Int {
+        let cabinet = arcadeCabinet()
         cabinet.run()
         return cabinet.tiles.filter { $0.type == .Block }.count
     }
 
-    func input() -> String {
-        // swiftlint:disable force_try
-        try! String(contentsOfFile: "./Day13.txt").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        // swiftlint:enable force_try
+    public func arcadeCabinet() -> ArcadeCabinet {
+        ArcadeCabinet(computer: IntcodeComputer(program: input()))
     }
 }

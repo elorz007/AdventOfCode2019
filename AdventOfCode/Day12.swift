@@ -164,7 +164,7 @@ class PairsIterator<T> {
     }
 }
 
-class Day12: NSObject {
+public class Day12: Day {
     func inputMoons() -> [Moon] {
         return [
             Moon(position: Position3D(x: 0, y: 6, z: 1)),
@@ -173,7 +173,7 @@ class Day12: NSObject {
             Moon(position: Position3D(x: 2, y: 19, z: 15))
         ]
     }
-    func totalEnergy() -> Int {
+    public func totalEnergy() -> Int {
         let universe = Universe(moons: inputMoons())
         for _ in 1...1000 {
             universe.step()
@@ -181,7 +181,7 @@ class Day12: NSObject {
         return universe.totalEnergy()
     }
 
-    func stepsUntilCycle() -> Int {
+    public func stepsUntilCycle() -> Int {
         return EfficientCycleFinder().stepsUntilCycle(moons: inputMoons())
     }
 }

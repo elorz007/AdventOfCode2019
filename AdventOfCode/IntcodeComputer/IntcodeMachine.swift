@@ -8,12 +8,12 @@
 
 import Cocoa
 
-protocol RawParsable {
+public protocol RawParsable {
     static var size: Int { get }
     init?(raw: [Int])
 }
 
-class IntcodeMachine<Result> where Result: RawParsable {
+public class IntcodeMachine<Result> where Result: RawParsable {
     fileprivate let computer: IntcodeComputer
 
     init(computer: IntcodeComputer) {

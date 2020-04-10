@@ -132,8 +132,8 @@ class Promise {
     }
 }
 
-class Day7: NSObject {
-    func findHighestSignal() -> Int {
+public class Day7: Day {
+    public func findHighestSignal() -> Int {
         var highestSignal = Int.min
         PhaseSettingsLimit.default.forEach { phaseSettings in
             let initialInput = 0
@@ -154,7 +154,7 @@ class Day7: NSObject {
         return amplifier.output!
     }
 
-    func findHighestSignalInFeedbackMode() -> Int {
+    public func findHighestSignalInFeedbackMode() -> Int {
         var highestSignal = Int.min
         PhaseSettingsLimit.feedbackMode.forEach { phaseSettings in
             let signal = self.runAmplifiersInFeedbackMode(phaseSettings: phaseSettings)
@@ -213,12 +213,6 @@ class Day7: NSObject {
     func connect(_ output: IntcodeComputer, with input: IntcodeComputer, through promise: Promise) {
         output.output = { promise.pass($0) }
         input.input = { promise.next() }
-    }
-
-    func input() -> String {
-        // swiftlint:disable force_try
-        try! String(contentsOfFile: "./Day7.txt").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        // swiftlint:enable force_try
     }
 
     lazy var inputCache = input()

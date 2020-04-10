@@ -127,12 +127,7 @@ class PathActions: NSObject {
     }
 }
 
-class Day3: NSObject {
-    func input() -> String {
-        // swiftlint:disable force_try
-        try! String(contentsOfFile: "./Day3.txt")
-        // swiftlint:enable force_try
-    }
+public class Day3: Day {
 
     func pathsFrom(input: String) -> (Path, Path) {
         let rawWires = input.split(separator: "\n")
@@ -146,14 +141,14 @@ class Day3: NSObject {
         return (path1, path2)
     }
 
-    func mahattanDistanceOfClosestIntersection() -> UInt {
+    public func mahattanDistanceOfClosestIntersection() -> UInt {
         let (path1, path2) = pathsFrom(input: input())
         let pathActions = PathActions()
         let closestIntersection = pathActions.closestIntersection(path1, path2)
         return closestIntersection!.manhattanDistance
     }
 
-    func stepsOfFastestIntersection() -> UInt {
+    public func stepsOfFastestIntersection() -> UInt {
         let (path1, path2) = pathsFrom(input: input())
         let pathActions = PathActions()
         let fastestIntersection = pathActions.fastestIntersection(path1, path2)

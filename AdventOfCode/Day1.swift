@@ -23,19 +23,13 @@ class FuelCalculator: NSObject {
     }
 }
 
-class Day1: NSObject {
-    func input() -> String {
-        // swiftlint:disable force_try
-        try! String(contentsOfFile: "./Day1.txt")
-        // swiftlint:enable force_try
-    }
-
-    func totalFuel() -> Int {
+public class Day1: Day {
+    public func totalFuel() -> Int {
         let calculator = FuelCalculator()
         return applyToAllMasses(calculator.fuel)
     }
 
-    func totalRealFuel() -> Int {
+    public func totalRealFuel() -> Int {
         let calculator = FuelCalculator()
         return applyToAllMasses(calculator.realFuel)
     }

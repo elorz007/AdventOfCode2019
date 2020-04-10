@@ -67,8 +67,8 @@ class PasswordChecker: NSObject {
 
 }
 
-class Day4: NSObject {
-    func numberOfDifferentPasswords() -> UInt {
+public class Day4: Day {
+    public func numberOfDifferentPasswords() -> UInt {
         var count: UInt = 0
         let checker = PasswordChecker()
         for passwordNumber in 284639...748759 {

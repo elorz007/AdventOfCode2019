@@ -153,21 +153,15 @@ extension Layer where Element == Color {
     }
 }
 
-class Day8: NSObject {
+public class Day8: Day {
 
-    func checksumOfPasswordImage() -> Int {
+    public func checksumOfPasswordImage() -> Int {
         let image = DefaultImageReader().read(input())
         return image.checksum()
     }
 
-    func printPasswordImage() {
+    public func printPasswordImage() {
         let image = ColorImageReader().read(input())
         image.render().print()
-    }
-
-    func input() -> String {
-        // swiftlint:disable force_try
-        try! String(contentsOfFile: "./Day8.txt").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        // swiftlint:enable force_try
     }
 }

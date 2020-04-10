@@ -140,21 +140,15 @@ extension AsteroidMap {
     }
 }
 
-class Day10: NSObject {
+public class Day10: Day {
 
-    func maxAsteroids() -> Int {
+   public  func maxAsteroids() -> Int {
         AsteroidMap(from: input()).countMaxAsteroids()
     }
 
-    func betAsteroidEncodedPosition() -> Int {
+    public func betAsteroidEncodedPosition() -> Int {
         let destroyedAsteroids = AsteroidMap(from: input()).destroyedAsteroids(from: Position(x: 22, y: 19))
         let betAsteroid = destroyedAsteroids[199]
         return betAsteroid.position.encoded
-    }
-
-    func input() -> String {
-        // swiftlint:disable force_try
-        try! String(contentsOfFile: "./Day10.txt").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        // swiftlint:enable force_try
     }
 }

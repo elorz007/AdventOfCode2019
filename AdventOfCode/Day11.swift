@@ -94,21 +94,15 @@ extension Panels {
     }
 }
 
-class Day11: NSObject {
-    func input() -> String {
-        // swiftlint:disable force_try
-        try! String(contentsOfFile: "./Day11.txt").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        // swiftlint:enable force_try
-    }
-
-    func coveredArea() -> Int {
+public class Day11: Day {
+    public func coveredArea() -> Int {
         let computer = IntcodeComputer(program: input())
         let robot = PaintingRobot(computer: computer)
         robot.run()
         return robot.coveredArea
     }
 
-    func paintRegistrationIdentifier() {
+    public func paintRegistrationIdentifier() {
         print(registrationIdentifierPanels().description)
     }
 

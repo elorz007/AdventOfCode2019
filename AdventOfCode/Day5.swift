@@ -8,14 +8,8 @@
 
 import Cocoa
 
-class Day5: NSObject {
-    func input() -> String {
-        // swiftlint:disable force_try
-        try! String(contentsOfFile: "./Day5.txt")
-        // swiftlint:enable force_try
-    }
-
-    func finalOutput() -> Int {
+public class Day5: Day {
+    public func finalOutput() -> Int {
         let computer = IntcodeComputer(program: input())
         computer.input = { 1 }
         var finalOutput = 0
@@ -24,7 +18,7 @@ class Day5: NSObject {
         return finalOutput
     }
 
-    func diagnosticCodeThermalRadiator() -> Int {
+    public func diagnosticCodeThermalRadiator() -> Int {
         let computer = IntcodeComputer(program: input())
         computer.input = { 5 }
         var output = 0

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class Day9: NSObject {
+public class Day9: Day {
 
     func runBoostComputer(withInput value: Int) -> Int {
         let computer = IntcodeComputer(program: input())
@@ -21,17 +21,11 @@ class Day9: NSObject {
         return result
     }
 
-    func boostKeyCode() -> Int {
+    public func boostKeyCode() -> Int {
         runBoostComputer(withInput: 1)
     }
 
-    func boostCoordinates() -> Int {
+    public func boostCoordinates() -> Int {
         runBoostComputer(withInput: 2)
-    }
-
-    func input() -> String {
-        // swiftlint:disable force_try
-        try! String(contentsOfFile: "./Day9.txt").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        // swiftlint:enable force_try
     }
 }

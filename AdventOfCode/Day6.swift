@@ -121,13 +121,7 @@ struct TreeDepthIterator<T>: IteratorProtocol {
     }
 }
 
-class Day6: NSObject {
-    func input() -> String {
-        // swiftlint:disable force_try
-        try! String(contentsOfFile: "./Day6.txt")
-        // swiftlint:enable force_try
-    }
-
+public class Day6: Day {
     func split(_ input: String) -> [String] {
         input.split { $0.isNewline }.map { String($0) }
     }
@@ -151,11 +145,11 @@ class Day6: NSObject {
         return tree
     }
 
-    func totalOrbits() -> UInt {
+    public func totalOrbits() -> UInt {
         return buildTree(input()).totalDepth()
     }
 
-    func minimumOrbitalTransfers() -> UInt {
+    public func minimumOrbitalTransfers() -> UInt {
         let tree = buildTree(input())
         let you = tree.first { $0.value == "YOU" }!
         let san = tree.first { $0.value == "SAN" }!
