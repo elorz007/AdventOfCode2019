@@ -21,6 +21,9 @@
 		84AB8587239C3B640036871B /* Day4Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB8585239C3B640036871B /* Day4Tests.swift */; };
 		84AB858C239D652F0036871B /* Day5Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB858B239D652F0036871B /* Day5Tests.swift */; };
 		84AB8594239EEEA60036871B /* Day6Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AB8593239EEEA60036871B /* Day6Tests.swift */; };
+		84AFCAB82443419E00B7A476 /* Day14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFCAB62443419B00B7A476 /* Day14.swift */; };
+		84AFCAB9244341A300B7A476 /* Day14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFCAB62443419B00B7A476 /* Day14.swift */; };
+		84AFCABB2443772600B7A476 /* Day14Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFCABA2443772600B7A476 /* Day14Tests.swift */; };
 		84C61E7123CFC29E008966A1 /* Day7Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C61E7023CFC29E008966A1 /* Day7Tests.swift */; };
 		84EBB2952440A5F30086FC6E /* Day13Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBB2942440A5F30086FC6E /* Day13Tests.swift */; };
 		84EBB29B2440A8510086FC6E /* IntcodeMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EBB29A2440A8510086FC6E /* IntcodeMachineTests.swift */; };
@@ -197,6 +200,8 @@
 		84AB858D239DAE850036871B /* Day5.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Day5.txt; sourceTree = "<group>"; };
 		84AB8590239EEAE00036871B /* Day6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day6.swift; sourceTree = "<group>"; };
 		84AB8593239EEEA60036871B /* Day6Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day6Tests.swift; sourceTree = "<group>"; };
+		84AFCAB62443419B00B7A476 /* Day14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day14.swift; sourceTree = "<group>"; };
+		84AFCABA2443772600B7A476 /* Day14Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day14Tests.swift; sourceTree = "<group>"; };
 		84C61E6B23CB3575008966A1 /* Day6.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Day6.txt; sourceTree = "<group>"; };
 		84C61E6E23CFBB7E008966A1 /* Day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day7.swift; sourceTree = "<group>"; };
 		84C61E7023CFC29E008966A1 /* Day7Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day7Tests.swift; sourceTree = "<group>"; };
@@ -322,6 +327,7 @@
 				846AAA92240DB375006E1B18 /* Day11.swift */,
 				8417C15D24279168008D3121 /* Day12.swift */,
 				84EBB2922440A2F60086FC6E /* Day13.swift */,
+				84AFCAB62443419B00B7A476 /* Day14.swift */,
 			);
 			path = AdventOfCode;
 			sourceTree = "<group>";
@@ -347,6 +353,7 @@
 				846AAA95240DB385006E1B18 /* Day11Tests.swift */,
 				8417C15F2427917D008D3121 /* Day12Tests.swift */,
 				84EBB2942440A5F30086FC6E /* Day13Tests.swift */,
+				84AFCABA2443772600B7A476 /* Day14Tests.swift */,
 			);
 			path = AdventOfCodeTests;
 			sourceTree = "<group>";
@@ -650,6 +657,7 @@
 				84EBB3542440E9DE0086FC6E /* Day6.swift in Sources */,
 				84EBB3522440E9DE0086FC6E /* Day4.swift in Sources */,
 				84EBB3502440E9DE0086FC6E /* Day2.swift in Sources */,
+				84AFCABB2443772600B7A476 /* Day14Tests.swift in Sources */,
 				84A1CCA624033A9C0031F550 /* Day10Tests.swift in Sources */,
 				84EBB3562440E9DE0086FC6E /* Day8.swift in Sources */,
 				84EBB3602440E9E50086FC6E /* Opcode.swift in Sources */,
@@ -672,6 +680,7 @@
 				84A1CCA123E5D0BB0031F550 /* OpcodeTests.swift in Sources */,
 				84AB8578239AB3730036871B /* Day2Tests.swift in Sources */,
 				84EBB34E2440E9DE0086FC6E /* Day.swift in Sources */,
+				84AFCAB9244341A300B7A476 /* Day14.swift in Sources */,
 				84AB8594239EEEA60036871B /* Day6Tests.swift in Sources */,
 				84EBB35E2440E9E50086FC6E /* Math.swift in Sources */,
 				84EBB34F2440E9DE0086FC6E /* Day1.swift in Sources */,
@@ -711,6 +720,7 @@
 				84EBB3232440E2680086FC6E /* IntcodeMachine.swift in Sources */,
 				84EBB3152440E25C0086FC6E /* Day2.swift in Sources */,
 				84EBB31E2440E25C0086FC6E /* Day11.swift in Sources */,
+				84AFCAB82443419E00B7A476 /* Day14.swift in Sources */,
 				84EBB3262440E26E0086FC6E /* Math.swift in Sources */,
 				84EBB31C2440E25C0086FC6E /* Day9.swift in Sources */,
 				84EBB3172440E25C0086FC6E /* Day4.swift in Sources */,
