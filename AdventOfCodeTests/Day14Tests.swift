@@ -259,7 +259,7 @@ class Day14Tests: XCTestCase {
         XCTAssertEqual(result, cost)
     }
 
-    func testDay14() {
+    func testDay14Part1() {
         XCTAssertEqual(Day14().costForOneFuel(), 899155)
     }
 
@@ -333,9 +333,14 @@ class Day14Tests: XCTestCase {
     }
 
     func assert(reactions input: String, withMaximumCost cost: Int = 1000000000000, produces fuel: Int) {
+        let graph = ReactionsReader().createGraph(from: input)
         let calculator = MaxFuelCalculator()
-        let result = calculator.maxFuel(for: input, with: cost)
+        let result = calculator.maxFuel(for: graph, with: cost)
         XCTAssertEqual(result, fuel)
+    }
+
+    func testDay14Part2() {
+        XCTAssertEqual(Day14().maxFuel(), 2390226)
     }
 
 }

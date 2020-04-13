@@ -64,5 +64,5 @@ print("Advent Of Code starting!")
 // Final score: 16309
 
 let d14 = Day14()
-print("[Day14] One FUEL costs: " + String(d14.costForOneFuel()))
-// Final score: 16309
+print("[Day14] One FUEL cost: " + String(d14.costForOneFuel()))
+print("[Day14] Max FUEL: " + String(d14.maxFuel()))

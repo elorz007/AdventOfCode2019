@@ -142,11 +142,7 @@ public class MaxFuelCalculator {
         min + (max - min) / 2
     }
 
-    public func maxFuel(for reactions: String, with maxCost: Int) -> Int {
-        let graph = ReactionsReader().createGraph(from: reactions)
-        var fuel = 1
-        let costForOne = costOfFuel(for: graph, amount: fuel)
-
+    public func maxFuel(for graph: Graph<String>, with maxCost: Int = 1000000000000) -> Int {
         // The function of f(fuel) -> cost is monotonically increasing
         // which means a fast way of finding the first point where f(x) > maxCost
         // can be done by choosing an upper and lower bound (fuelEstimateMin and fuelEstimateMax)
@@ -155,14 +151,16 @@ public class MaxFuelCalculator {
         // if the cost for that middle point is lower then we know a new minimu which is way closer
         // we repeat this until our middle point is exactly the minimum
         // (meaning that even one more to the middle point would go over)
+        // You can also understand this as a "binary search"
 
+        let costForOne = costOfFuel(for: graph, amount: 1)
         var fuelEstimateMin = maxCost / costForOne
-        var fuelEstimateMax = fuelEstimateMin * 2
-        fuel = middlePoint(min: fuelEstimateMin, max: fuelEstimateMax)
+        // Seems weird but we know the fuel cannot cost less than 1 so maximum fuel is exactly the cost
+        var fuelEstimateMax = maxCost
 
+        var fuel = middlePoint(min: fuelEstimateMin, max: fuelEstimateMax)
         while fuel != fuelEstimateMin {
             let cost = costOfFuel(for: graph, amount: fuel)
-
             if cost < maxCost {
                 fuelEstimateMin = fuel
             } else {
@@ -179,5 +177,11 @@ public class Day14: Day {
         let graph = ReactionsReader().createGraph(from: input())
         let calculator = MaxFuelCalculator()
         return calculator.costOfFuel(for: graph)
+    }
+
+    public func maxFuel() -> Int {
+        let graph = ReactionsReader().createGraph(from: input())
+        let calculator = MaxFuelCalculator()
+        return calculator.maxFuel(for: graph)
     }
 }
