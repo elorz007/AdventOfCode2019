@@ -59,6 +59,10 @@ print("Advent Of Code starting!")
 //print("[Day12] Total energy: " + String(d12.totalEnergy()))
 //print("[Day12] Steps until full repeat: " + String(d12.stepsUntilCycle()))
 
-let d13 = Day13()
-print("[Day13] Block tiles: " + String(d13.numberOfBlockTiles()))
+//let d13 = Day13()
+//print("[Day13] Block tiles: " + String(d13.numberOfBlockTiles()))
+// Final score: 16309
+
+let d14 = Day14()
+print("[Day14] One FUEL costs: " + String(d14.costForOneFuel()))
 // Final score: 16309

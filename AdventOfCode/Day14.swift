@@ -23,12 +23,17 @@ public protocol Graphable {
 public protocol Weightable {
     associatedtype Vertex: Hashable
     func add(vertex: Vertex, weight: Int)
-    func weight(from source: Vertex) -> Int?
+    func weight(of vertex: Vertex) -> Int?
 }
 
-public class Graph<Vertex: Hashable>: Graphable, Weightable {
+public protocol Degreeable: Graphable {
+    func degree(of vertex: Vertex) -> Int
+}
+
+public class Graph<Vertex: Hashable>: Graphable, Weightable, Degreeable {
     public var edges: [Vertex: Set<Edge<Vertex>>] = [:]
     public var weights: [Vertex: Int] = [:]
+    public var degrees: [Vertex: Int] = [:]
 
     public func addEdge(from source: Vertex, to destination: Vertex, weight: Int) {
         let edge = Edge(source: source, destination: destination, weight: weight)
@@ -36,6 +41,12 @@ public class Graph<Vertex: Hashable>: Graphable, Weightable {
             edges[source] = [edge]
         } else {
             edges[source]?.insert(edge)
+        }
+
+        if degrees[destination] == nil {
+            degrees[destination] = 1
+        } else {
+            degrees[destination]! += 1
         }
     }
 
@@ -47,8 +58,12 @@ public class Graph<Vertex: Hashable>: Graphable, Weightable {
         weights[vertex] = weight
     }
 
-    public func weight(from source: Vertex) -> Int? {
-        return weights[source]
+    public func weight(of vertex: Vertex) -> Int? {
+        return weights[vertex]
+    }
+
+    public func degree(of vertex: Vertex) -> Int {
+        return degrees[vertex] ?? 0
     }
 }
 
@@ -82,27 +97,50 @@ public class ReactionsReader {
 
 protocol GraphWeightCalculator {
     associatedtype Vertex: Hashable
-    func computeTotalCost(for graph: Graph<Vertex>, from source: Vertex) -> Int
+    func computeTotalCost(for graph: Graph<Vertex>, of vertex: Vertex, source: Vertex) -> Int
 }
 
 public class RecursiveGraphWeightCalculator<Vertex: Hashable>: GraphWeightCalculator {
+    var amounts: [Vertex: Int] = [:]
+    var visited: [Vertex: Int] = [:]
 
-    func computeTotalCost(for graph: Graph<Vertex>, from vertex: Vertex, amountWanted: Int) -> Int {
-        if let weight = graph.weight(from: vertex) {
-            let amountNeeded = amountWanted / weight + min(amountWanted % weight, 1)
-            return graph.edges(from: vertex).reduce(0) { $0 + computeTotalCost(for: graph, from: $1.destination, amountWanted: amountNeeded * $1.weight) }
-        } else {
-            return amountWanted // vertex is the final node (no edges from it, cost is constant)
+    func visit(vertex: Vertex) {
+        visited[vertex] = (visited[vertex] ?? 0) + 1
+    }
+
+    func isFullyVisited(vertex: Vertex, in graph: Graph<Vertex>) -> Bool {
+        visited[vertex]! >= graph.degree(of: vertex)
+    }
+
+    func computeAmounts(for graph: Graph<Vertex>, from vertex: Vertex) {
+        let edges = graph.edges(from: vertex)
+        if edges.isEmpty { return } // source node (ORE)
+
+        visit(vertex: vertex)
+        guard isFullyVisited(vertex: vertex, in: graph) else { return }
+
+        let weight = graph.weight(of: vertex)!
+        let amountWanted = amounts[vertex]!
+        let amountNeeded = amountWanted / weight + min(amountWanted % weight, 1)
+
+        for edge in edges {
+            amounts[edge.destination] = (amounts[edge.destination] ?? 0) + edge.weight * amountNeeded
+            computeAmounts(for: graph, from: edge.destination)
         }
     }
 
-    public func computeTotalCost(for graph: Graph<Vertex>, from vertex: Vertex) -> Int {
-        let initalAmountWanted = graph.weight(from: vertex)!
-        return computeTotalCost(for: graph, from: vertex, amountWanted: initalAmountWanted)
+    public func computeTotalCost(for graph: Graph<Vertex>, of vertex: Vertex, source: Vertex) -> Int {
+        amounts[vertex] = graph.weight(of: vertex)!
+        computeAmounts(for: graph, from: vertex)
+        return amounts[source]!
     }
 
 }
 
-class Day14: Day {
-
+public class Day14: Day {
+    public func costForOneFuel() -> Int {
+        let graph = ReactionsReader().createGraph(from: input())
+        let calculator = RecursiveGraphWeightCalculator<String>()
+        return calculator.computeTotalCost(for: graph, of: "FUEL", source: "ORE")
+    }
 }
