@@ -22,7 +22,7 @@ public protocol Graphable {
 
 public protocol Weightable {
     associatedtype Vertex: Hashable
-    func add(vertex: Vertex, weight: Int)
+    func set(weight: Int, of vertex: Vertex)
     func weight(of vertex: Vertex) -> Int?
 }
 
@@ -54,7 +54,7 @@ public class Graph<Vertex: Hashable>: Graphable, Weightable, Degreeable {
         return edges[source] ?? []
     }
 
-    public func add(vertex: Vertex, weight: Int) {
+    public func set(weight: Int, of vertex: Vertex) {
         weights[vertex] = weight
     }
 
@@ -75,7 +75,7 @@ public class ReactionsReader {
 
             let resultPart = reactionParts.last!
             let (resultAmount, resultName) = separate(resultPart)
-            graph.add(vertex: resultName, weight: resultAmount)
+            graph.set(weight: resultAmount, of: resultName)
 
             let ingredientsPart = reactionParts.first!
             ingredientsPart.components(separatedBy: ",").forEach { ingredient in
@@ -95,12 +95,7 @@ public class ReactionsReader {
     }
 }
 
-protocol GraphWeightCalculator {
-    associatedtype Vertex: Hashable
-    func computeTotalCost(for graph: Graph<Vertex>, of vertex: Vertex, source: Vertex) -> Int
-}
-
-public class RecursiveGraphWeightCalculator<Vertex: Hashable>: GraphWeightCalculator {
+public class RecursiveGraphWeightCalculator<Vertex: Hashable> {
     var amounts: [Vertex: Int] = [:]
     var visited: [Vertex: Int] = [:]
 
@@ -129,18 +124,60 @@ public class RecursiveGraphWeightCalculator<Vertex: Hashable>: GraphWeightCalcul
         }
     }
 
-    public func computeTotalCost(for graph: Graph<Vertex>, of vertex: Vertex, source: Vertex) -> Int {
-        amounts[vertex] = graph.weight(of: vertex)!
+    public func totalCost(for graph: Graph<Vertex>, of vertex: Vertex, source: Vertex, wanted amount: Int) -> Int {
+        amounts[vertex] = amount
         computeAmounts(for: graph, from: vertex)
         return amounts[source]!
     }
+}
 
+public class MaxFuelCalculator {
+
+    public func costOfFuel(for graph: Graph<String>, amount: Int = 1) -> Int {
+        let calculator = RecursiveGraphWeightCalculator<String>()
+        return calculator.totalCost(for: graph, of: "FUEL", source: "ORE", wanted: amount)
+    }
+
+    func middlePoint(min: Int, max: Int) -> Int {
+        min + (max - min) / 2
+    }
+
+    public func maxFuel(for reactions: String, with maxCost: Int) -> Int {
+        let graph = ReactionsReader().createGraph(from: reactions)
+        var fuel = 1
+        let costForOne = costOfFuel(for: graph, amount: fuel)
+
+        // The function of f(fuel) -> cost is monotonically increasing
+        // which means a fast way of finding the first point where f(x) > maxCost
+        // can be done by choosing an upper and lower bound (fuelEstimateMin and fuelEstimateMax)
+        // which we know are true in the beginning and then try a middle point
+        // if the cost for that middle point is higher then we know a new maximum which is way closer
+        // if the cost for that middle point is lower then we know a new minimu which is way closer
+        // we repeat this until our middle point is exactly the minimum
+        // (meaning that even one more to the middle point would go over)
+
+        var fuelEstimateMin = maxCost / costForOne
+        var fuelEstimateMax = fuelEstimateMin * 2
+        fuel = middlePoint(min: fuelEstimateMin, max: fuelEstimateMax)
+
+        while fuel != fuelEstimateMin {
+            let cost = costOfFuel(for: graph, amount: fuel)
+
+            if cost < maxCost {
+                fuelEstimateMin = fuel
+            } else {
+                fuelEstimateMax = fuel
+            }
+            fuel = middlePoint(min: fuelEstimateMin, max: fuelEstimateMax)
+        }
+        return fuel
+    }
 }
 
 public class Day14: Day {
     public func costForOneFuel() -> Int {
         let graph = ReactionsReader().createGraph(from: input())
-        let calculator = RecursiveGraphWeightCalculator<String>()
-        return calculator.computeTotalCost(for: graph, of: "FUEL", source: "ORE")
+        let calculator = MaxFuelCalculator()
+        return calculator.costOfFuel(for: graph)
     }
 }
